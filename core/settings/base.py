@@ -18,19 +18,19 @@ from core.dj_extensions import cors_headers, rest_framework, simple_jwt
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # locate .env.base file
-BASE_ENV_PATH = BASE_DIR / '.env.base'
+BASE_ENV_PATH = BASE_DIR / '.env/base/.env'
 
-# load the environment variables in .env.base
+# load the environment variables in .env/base/.env
 base_env_config = dotenv_values(dotenv_path=BASE_ENV_PATH)
 
 # if ENVIRONMENT is set to 'prod' in the .env.base file load the
-# production environment variable ('.env.prod') else
-# load the development environment variables ('.env.dev')
+# production environment variable ('.env/prod/.env') else
+# load the development environment variables ('.env/dev/.env')
 
 if base_env_config['ENVIRONMENT'] == 'prod':
-    ENV_FILE_PATH = BASE_DIR / '.env.prod'
+    ENV_FILE_PATH = BASE_DIR / '.env/prod/.env'
 else:
-    ENV_FILE_PATH = BASE_DIR / '.env.dev'
+    ENV_FILE_PATH = BASE_DIR / '.env/dev/.env'
 
 # load environment variables for the specified environment (either `.env.prod` or `.env.dev`)
 env_config = dotenv_values(dotenv_path=ENV_FILE_PATH)
