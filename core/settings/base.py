@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from dotenv import dotenv_values
 from pathlib import Path
 
+from core.dj_extensions import cors_headers, rest_framework, simple_jwt
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -40,9 +42,10 @@ env_config = dotenv_values(dotenv_path=ENV_FILE_PATH)
 SECRET_KEY = env_config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_config['DEBUG']
 
 ALLOWED_HOSTS = []
+ALLOWED_ORIGINS = env_config['ALLOWED_ORIGINS']
 
 API_PREFIX = env_config['API_PREFIX']
 API_VERSIONS = env_config['API_VERSIONS']
@@ -57,11 +60,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'rest_framework_simplejwt',
     'apis.base',
     'apis.scan_reports',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,3 +150,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# API Extensions Settings
+
+# CORS Settings
+
+cors_headers.CORS_CONFIG(ALLOWED_ORIGINS).settings()
+
+# REST Framework Settings
+REST_FRAMEWORK = rest_framework.REST_FRAMEWORK_CONFIG.settings()
+
+# Simple JWT Settings
+SIMPLE_JWT = simple_jwt.SIMPLE_JWT_CONFIG(SECRET_KEY).settings()
