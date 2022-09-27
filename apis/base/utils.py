@@ -6,7 +6,7 @@ import os
 from apis.utils.error_logs import logger
 
 
-def scan_IP(ip_address: str):
+def CVE_Scan(ip_address: str):
     """Script to scan IP and convert output to JSON."""
 
     out_file = f"{ip_address}.xml"
@@ -15,7 +15,7 @@ def scan_IP(ip_address: str):
     os.chdir("../")
 
     # navigate to the CVEScannerV2 directory
-    os.chdir("CVEScannerV2")
+    os.chdir("tools/CVEScannerV2")
 
     try:
         # create ip_scans directory
@@ -143,3 +143,28 @@ def convert_to_json(out_file: str):
     # convert the cleaned data to JSON format.
     result = json.dumps(data, indent=4)
     return result
+
+
+
+def sslyze_scan(ip_address: str):
+    """Script to scan IP with SSLYZE scanner."""
+    
+    out_file = f'{ip_address}.json'
+    
+    # change directory to ~/ (/home/{$username})
+    os.chdir("../")
+
+    # navigate to the sslyze_json output directory
+    os.chdir("tools/sslyze_json")
+    
+    scan_output = subprocess.run(f'python3 -m sslyze {ip_address} '
+                                 f'--json_out={ip_address}.json',
+                                 shell=True)
+    
+    with open(f'{ip_address}.json') as f:
+        json_output = f.read()
+        
+        return json_output
+    
+    
+    

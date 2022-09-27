@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from .utils import scan_IP
+from .utils import CVE_Scan
 
 
 class GetRoutes(APIView):
@@ -32,5 +32,5 @@ class VulnerabilityScanner(APIView):
                             status=status.HTTP_400_BAD_REQUEST)
 
         # scan IP and convert to the output to JSON
-        result = scan_IP(ip_address)
+        result = CVE_Scan(ip_address)
         return Response(result, status=status.HTTP_200_OK)
