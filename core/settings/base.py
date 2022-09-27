@@ -32,7 +32,7 @@ if base_env_config['ENVIRONMENT'] == 'prod':
 else:
     ENV_FILE_PATH = BASE_DIR / '.env/dev/.env'
 
-# load environment variables for the specified environment (either `.env.prod` or `.env.dev`)
+# load environment variables for the specified environment (either `.env/prod/.env` or `.env/dev/.env`)
 env_config = dotenv_values(dotenv_path=ENV_FILE_PATH)
 
 # Quick-start development settings - unsuitable for production
