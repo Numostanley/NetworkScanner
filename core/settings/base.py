@@ -44,7 +44,11 @@ SECRET_KEY = env_config['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_config['DEBUG']
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = env_config['ALLOWED_HOSTS']
+=======
+ALLOWED_HOSTS = env_config['ALLOWED_HOSTS'].split(',')
+>>>>>>> c3c9a1e4f1ef46d0808e3681d92cca241e837e15
 ALLOWED_ORIGINS = env_config['ALLOWED_ORIGINS']
 
 API_PREFIX = env_config['API_PREFIX']
