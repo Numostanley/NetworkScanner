@@ -4,6 +4,7 @@ import json
 import subprocess
 import os
 from apis.utils.error_logs import logger
+from sslyze import SslyzeOutputAsJson, ServerScanStatusEnum, ScanCommandAttemptStatusEnum
 
 
 def CVE_Scan(ip_address: str):
@@ -158,13 +159,38 @@ def sslyze_scan(ip_address: str):
     os.chdir("tools/sslyze_json")
     
     scan_output = subprocess.run(f'python3 -m sslyze {ip_address} '
-                                 f'--json_out={ip_address}.json',
+                                 f'--json_out={out_file}',
                                  shell=True)
     
+    # parse the generated JSON file
     with open(f'{ip_address}.json') as f:
         json_output = f.read()
         
+        # # These results can be parsed
+        # parsed_results = SslyzeOutputAsJson.parse_raw(json_output)
+
+        # # Making it easy to do post-processing and inspection of the results
+        # print("The following servers were scanned:")
+        # for server_scan_result in parsed_results.server_scan_results:
+        #     print(f"\n****{server_scan_result.server_location.hostname}:{server_scan_result.server_location.port}****")
+
+        #     if server_scan_result.scan_status == ServerScanStatusEnum.ERROR_NO_CONNECTIVITY:
+        #         print(f"That scan failed with the following error:\n{server_scan_result.connectivity_error_trace}")
+        #         continue
+
+        #     assert server_scan_result.scan_result
+            
+        #     certinfo_attempt = server_scan_result.scan_result.certificate_info
+        #     if certinfo_attempt.status == ScanCommandAttemptStatusEnum.ERROR:
+        #         _print_failed_scan_command_attempt(certinfo_attempt)  # type: ignore
+        #     else:
+        #         certinfo_result = server_scan_result.scan_result.certificate_info.result
+                
+        #         assert certinfo_result
+        #         # for cert_deployment in certinfo_result.certificate_deployments:
+        #         #     print(f"    SHA1 of leaf certificate: {cert_deployment.received_certificate_chain[0].fingerprint_sha1}")
+                
+        #         # print("")
+    
         return json_output
-    
-    
-    
+   
