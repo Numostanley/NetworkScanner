@@ -32,7 +32,8 @@ if base_env_config['ENVIRONMENT'] == 'prod':
 else:
     ENV_FILE_PATH = BASE_DIR / '.env/dev/.env'
 
-# load environment variables for the specified environment (either `.env/prod/.env` or `.env/dev/.env`)
+# load environment variables for the specified
+# environment (either `.env/prod/.env` or `.env/dev/.env`)
 env_config = dotenv_values(dotenv_path=ENV_FILE_PATH)
 
 # Quick-start development settings - unsuitable for production
@@ -154,7 +155,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API Extensions Settings
 
 # CORS Settings
-
 cors_headers.CORS_CONFIG(ALLOWED_ORIGINS).settings()
 
 # REST Framework Settings
