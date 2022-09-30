@@ -13,7 +13,7 @@ class WapitiScanner(Scanner):
     """script to execute wapiti command to scan an IP address."""
     
     def __init__(self, ip_address: str, tool='wapiti'):
-        super().__init__(tool, ip_address)
+        super(WapitiScanner, self).__init__(ip_address, tool)
         self.ip_address = ip_address
         self.output_file = f'{ip_address}.json'
         self.data = []
@@ -109,5 +109,3 @@ class WapitiScanner(Scanner):
             return {"Response":f"Scan result does not contain {e}"}
             
         return self.data
-        
-            
