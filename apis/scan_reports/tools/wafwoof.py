@@ -2,6 +2,7 @@
 script to run the wafw00f scan on the ip addresses
 """
 
+import json
 import subprocess
 
 from .base import Scanner, get_server_user
@@ -55,4 +56,4 @@ class WafWoofScanner(Scanner):
 
     def response(self):
         """return response"""
-        return self.scan()
+        return json.loads(self.scan())

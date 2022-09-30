@@ -2,6 +2,7 @@
 script to run the whatweb scan on the ip addresses
 """
 
+import json
 import subprocess
 
 from .base import Scanner, get_server_user
@@ -53,4 +54,4 @@ class WhatWebScanner(Scanner):
 
     def response(self):
         """return response"""
-        return self.scan()
+        return json.loads(self.scan())

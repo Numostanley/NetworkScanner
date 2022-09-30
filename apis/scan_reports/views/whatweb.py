@@ -1,5 +1,3 @@
-import json
-
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -23,8 +21,7 @@ class WhatWebScannerAPIView(APIView):
             # scan ip address and return response
             whatweb = WhatWebScanner(ip_address)
             data = whatweb.response()
-            json_data = json.loads(data)
-            return responses.http_response_200('Scan successful', json_data)
+            return responses.http_response_200('Scan successful', data)
         except Exception as e:
             error_logs.logger.error('WhatWebScannerAPIView.get@Error')
             error_logs.logger.error(e)
