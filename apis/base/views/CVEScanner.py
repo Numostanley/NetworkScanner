@@ -2,7 +2,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from .utils import scan_IP
+from apis.utils import responses, error_logs
+from apis.scan_reports.tools.cvescanner import CVEScanner 
 
 
 class GetRoutes(APIView):
@@ -16,7 +17,7 @@ class GetRoutes(APIView):
         return Response(Routes)
 
 
-class VulnerabilityScanner(APIView):
+class CVEScannerAPI(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
@@ -31,6 +32,13 @@ class VulnerabilityScanner(APIView):
             return Response("IP was not specified.",
                             status=status.HTTP_400_BAD_REQUEST)
 
-        # scan IP and convert to the output to JSON
-        result = scan_IP(ip_address)
-        return Response(result, status=status.HTTP_200_OK)
+        try:
+            # scan ip address and return response
+            cvescanner = CVEScanner(ip_address)
+            data = cvescanner.response()
+            # print(data)
+            return responses.http_response_200('Scan successful', data)
+        except Exception as e:
+            error_logs.logger.error('CVEScannerAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')

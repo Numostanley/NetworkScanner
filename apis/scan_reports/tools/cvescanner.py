@@ -6,7 +6,8 @@ import json
 import subprocess
 
 import xmltodict
-
+import re
+from apis.utils.error_logs import logger
 from .base import Scanner
 
 
@@ -53,18 +54,25 @@ class CVEScanner(Scanner):
                                      f'-sV --script ./cvescannerv2.nse {self.ip_address}',
                                      shell=True)
 
-        # parse nmap xml result to dict values
-        nmap_results = xmltodict.parse(xml_content)
+        # cd into ip_scans directory
+        self.server_os.chdir("ip_scans")
+        
+        # open the xml file to ensure it was created.
+        with open(self.output_file, 'r') as f:
+            xml_file = f.read()
+            
+            # parse nmap xml result to dict values
+            nmap_results = xmltodict.parse(xml_file)
 
-        results = self.get_host_port_list(nmap_results)
-        return results
+            results = self.get_host_port_list(nmap_results)
+            return results
 
     def response(self):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
 
-    def get_host_port_list(self, nmap_results: dict):
+    def get_host_port_list(self, nmap_results):
         """
         retrieve list of ports from the result
         """
@@ -80,35 +88,82 @@ class CVEScanner(Scanner):
                 }
 
                 port_index = nmap_port_list.index(port)
+
                 nmap_script = nmap_port_list[port_index]['script']
+
+                if isinstance(nmap_script, dict):
+                    item_elements = nmap_script['elem']
+
+                    cve_results = item_elements[5:]
+                    CvE_Data = []
+
+                    for item in cve_results:
+                        cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+
+                        cve_dict = {
+                            "cveid": cve_id.strip(),
+                            "csvssv2": cvssv2.strip(),
+                            "csvssv3": cvssv3.strip(),
+                            "exploitdb": exploitdb.strip(),
+                            "metasploit": metasploit.strip()
+                        }
+
+                        CvE_Data.append(cve_dict)
+
+                    result.update({
+                        "Product": item_elements[0],
+                        "version": item_elements[1],
+                        "cves": item_elements[3],
+                        "CVE_Data": CvE_Data
+                    })
 
                 if isinstance(nmap_script, list):
                     first_item = nmap_script[0]
                     item_elements = first_item['elem']
-                    result.update({
-                        "version": item_elements[1],
-                        "cves": item_elements[3],
-                        "cveid": "",
-                        "csvssv2": "",
-                        "csvssv3": "",
-                        "exploitdb": "",
-                        "metasploit": ""
-                    })
 
-                if isinstance(nmap_script, dict):
-                    item_elements = nmap_script['elem']
+                    cve_results = item_elements[5:]
+                    CvE_Data = []
+
+                    for item in cve_results:
+                        cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+
+                        cve_dict = {
+                            "cveid": cve_id.strip(),
+                            "csvssv2": cvssv2.strip(),
+                            "csvssv3": cvssv3.strip(),
+                            "exploitdb": exploitdb.strip(),
+                            "metasploit": metasploit.strip()
+                        }
+
+                        CvE_Data.append(cve_dict)
+
                     result.update({
+                        "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "cveid": "",
-                        "csvssv2": "",
-                        "csvssv3": "",
-                        "exploitdb": "",
-                        "metasploit": ""
+                        "CVE_Data": CvE_Data
                     })
 
                 self.data.append(result)
-        except KeyError:  # no open ports
-            pass
+
+            end_time = nmap_results['nmaprun']['host']['@endtime']
+            start_time = nmap_results['nmaprun']['host']['@starttime']
+
+            scan_time = {"Scan time": f"{int(end_time) - int(start_time)} secs"}
+
+            self.data.append(scan_time)
+
+        except KeyError as e:  # either host is down
+            # or no open ports or CVEScan data
+
+            # delete the created file if an error occured.
+            subprocess.run(f'rm -f {self.output_file}',
+                        capture_output=True,
+                        shell=True,
+                        check=True)
+
+            logger.error("Key Error")
+            logger.error(e)
+            return {"message": "host is either down or has no open ports or CVEScan data"}
 
         return self.data

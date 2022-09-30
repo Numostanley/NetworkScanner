@@ -1,8 +1,11 @@
 from django.urls import path
-from . import views
+from .views import CVEScanner, sslyze, wapiti
 
 
 urlpatterns = [
-    path("", views.GetRoutes.as_view()),
-    path('scan', views.VulnerabilityScanner.as_view(), name="scan"),
+    path("", CVEScanner.GetRoutes.as_view()),
+    path('cvescan', CVEScanner.CVEScannerAPI.as_view(), name="cvescan"),
+    path('sslyze_scan', sslyze.SslyzeAPIView.as_view(), name="sslyze_scan"),
+    path('wapiti_scan', wapiti.WapitiAPIView.as_view(), name="wapiti_scan"),
+    
 ]
