@@ -15,7 +15,7 @@ class sslyze(Scanner):
     def __init__(self, ip_address: str, tool='sslyze'):
         super().__init__(tool, ip_address)
         self.ip_address = ip_address
-        self.output_file = f'{ip_address}.xml'
+        self.output_file = f'{ip_address}.json'
         self.data = []
         self.tool = tool
     
@@ -93,16 +93,41 @@ class sslyze(Scanner):
         
         elif sslyze_result["server_scan_results"][0]["scan_status"] == "COMPLETED":
             
-            result = {
-                "ip_address": sslyze_result["server_scan_results"][0]["server_location"]["ip_address"],
-                "port": sslyze_result["server_scan_results"][0]["server_location"]["port"],
-                "connection_type": sslyze_result["server_scan_results"][0]["server_location"]["connection_type"],
-                "scan_status": sslyze_result["server_scan_results"][0]["scan_status"],
-                "uuid": sslyze_result["server_scan_results"][0]["uuid"],
-                "date_scans_completed": sslyze_result["date_scans_completed"],
-                "date_scans_started": sslyze_result["date_scans_started"],
-                
-            }
+            if sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["status"] == "COMPLETED":
+            
+                result = {
+                    "ip_address": sslyze_result["server_scan_results"][0]["server_location"]["ip_address"],
+                    "port": sslyze_result["server_scan_results"][0]["server_location"]["port"],
+                    "connection_type": sslyze_result["server_scan_results"][0]["server_location"]["connection_type"],
+                    "scan_status": sslyze_result["server_scan_results"][0]["scan_status"],
+                    "uuid": sslyze_result["server_scan_results"][0]["uuid"],
+                    "date_scans_completed": sslyze_result["date_scans_completed"],
+                    "date_scans_started": sslyze_result["date_scans_started"],
+                    "connectivity_error_trace": sslyze_result["server_scan_results"][0]["connectivity_error_trace"],
+                    "connectivity_result": sslyze_result["server_scan_results"][0]["connectivity_result"],
+                    "connectivity_status": sslyze_result["server_scan_results"][0]["connectivity_status"],
+                    "network_configuration": sslyze_result["server_scan_results"][0]["network_configuration"],
+                    "scan_result": {
+                        "certificate_info": {
+                            "error_reason": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["error_reason"],
+                            "error_trace": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["error_trace"],
+                            "result": {
+                                "certificate_deployments": {
+                                    "leaf_certificate_has_must_staple_extension": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0][ "leaf_certificate_has_must_staple_extension"],
+                                    "leaf_certificate_is_ev": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0]["leaf_certificate_is_ev"],
+                                    "leaf_certificate_signed_certificate_timestamps_count": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0]["leaf_certificate_signed_certificate_timestamps_count"],
+                                    "leaf_certificate_subject_matches_hostname": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0]["leaf_certificate_subject_matches_hostname"],
+                                    "ocsp_response": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0]["ocsp_response"],
+                                    "ocsp_response_is_trusted": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["result"]["certificate_deployments"][0]["ocsp_response_is_trusted"],
+                                    } 
+                            },
+                            "status": sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["status"],
+                        }
+                    }
+                    
+                }
+            else:
+                return {"Response":"SCAN_RESULT_CERTIFICATE_INFO_ERROR"}
         
         self.data.append(result)
         
