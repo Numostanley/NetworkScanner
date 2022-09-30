@@ -9,7 +9,7 @@ from apis.utils.error_logs import logger
 from .base import Scanner
 
 
-class sslyze(Scanner):
+class SslyzeScanner(Scanner):
     """script to execute SSLYZE command to scan an IP address."""
     
     def __init__(self, ip_address: str, tool='sslyze'):
@@ -24,7 +24,7 @@ class sslyze(Scanner):
         # change directory to ~/ (/home/{$username})
         self.server_os.chdir("../")
 
-        # cd to the CVEScannerV2 directory
+        # cd to the SSLYZE directory
         self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
         
     

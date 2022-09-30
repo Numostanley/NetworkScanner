@@ -3,10 +3,10 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from apis.utils import responses, error_logs
-from apis.scan_reports.tools.sslyze import SslyzeScanner
+from apis.scan_reports.tools.wapiti import WapitiScanner
 
 
-class SslyzeAPIView(APIView):
+class WapitiAPIView(APIView):
     
     permission_classes = (AllowAny,)
 
@@ -15,7 +15,7 @@ class SslyzeAPIView(APIView):
     
     
     def post(self, request, *args, **kwargs):
-        """script to execute sslyze command to scan an IP address."""
+        """script to execute wapiti command to scan an IP address."""
         
         ip_address = request.data['IP']
 
@@ -25,12 +25,12 @@ class SslyzeAPIView(APIView):
             
         try:
             # scan ip address and return response
-            sslyze_scan = SslyzeScanner(ip_address)
-            data = sslyze_scan.response()
+            wapiti_scan = WapitiScanner(ip_address)
+            data = wapiti_scan.response()
             print(data)
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
-            error_logs.logger.error('SslyzeAPIView.get@Error')
+            error_logs.logger.error('WapitiAPIView.get@Error')
             error_logs.logger.error(e)
             return responses.http_response_500('An error occurred!')
         
