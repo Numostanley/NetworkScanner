@@ -25,7 +25,7 @@ class CVEScanner(Scanner):
         self.server_os.chdir("../")
 
         # cd to the CVEScannerV2 directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
+        self.server_os.chdir(f"/home/{self.server_user()}/tools/{self.tool}")
 
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""

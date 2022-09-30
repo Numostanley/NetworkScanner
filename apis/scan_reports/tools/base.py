@@ -2,21 +2,26 @@
 An abstract class for all scanning tools
 """
 
+import getpass
 import os
 import subprocess
+
 from abc import ABC, abstractmethod
 
-from core.extras import env_vars
+
+def get_server_user():
+    """
+    get the current user account on the remote server
+        ex: ubuntu@ip_address (where ubuntu is the server user)
+    """
+    return getpass.getuser()
 
 
 class Scanner(ABC):
     """
-    server_user: the user on the remote server
-        ex: ubuntu@ip_address (where ubuntu is the server user)
     cmd: to execute subprocess module commands
     server_os: to execute os module functions
     """
-    server_user: str = env_vars.SERVER_USER
     cmd = subprocess
     server_os = os
 
