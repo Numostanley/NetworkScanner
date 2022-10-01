@@ -13,7 +13,7 @@ class SslyzeScanner(Scanner):
     """script to execute SSLYZE command to scan an IP address."""
     
     def __init__(self, ip_address: str, tool='sslyze'):
-        super().__init__(tool, ip_address)
+        super(SslyzeScanner, self).__init__(ip_address, tool)
         self.ip_address = ip_address
         self.output_file = f'{ip_address}.json'
         self.data = []
@@ -25,7 +25,7 @@ class SslyzeScanner(Scanner):
         self.server_os.chdir("../")
 
         # cd to the SSLYZE directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
+        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}_result")
         
     
     def mkdir_ip_scans_dir(self):
@@ -150,4 +150,4 @@ class SslyzeScanner(Scanner):
         
         return self.data
         
-     
+    

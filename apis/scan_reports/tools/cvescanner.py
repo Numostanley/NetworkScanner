@@ -15,7 +15,7 @@ class CVEScanner(Scanner):
     """script to execute CVEScanner command to scan an IP address."""
 
     def __init__(self, ip_address: str, tool='CVEScannerV2'):
-        super().__init__(tool, ip_address)
+        super(CVEScanner, self).__init__(ip_address, tool)
         self.ip_address = ip_address
         self.output_file = f'{ip_address}.xml'
         self.data = []
