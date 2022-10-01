@@ -6,7 +6,7 @@ import json
 import subprocess
 
 from apis.utils.error_logs import logger
-from .base import Scanner
+from .base import Scanner, get_server_user
 
 
 class SslyzeScanner(Scanner):
@@ -25,7 +25,7 @@ class SslyzeScanner(Scanner):
         self.server_os.chdir("../")
 
         # cd to the SSLYZE directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}_result")
+        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}_result")
         
     
     def mkdir_ip_scans_dir(self):
