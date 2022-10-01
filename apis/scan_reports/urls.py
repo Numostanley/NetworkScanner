@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apis.scan_reports.views import cvescanner, dirb, wafwoof, wapiti, whatweb
+from apis.scan_reports.views import cvescanner, dirby, wafwoof, wapiti, whatweb
 
 
 urlpatterns = [
@@ -9,7 +9,7 @@ urlpatterns = [
     path('cve-scan', cvescanner.CVEScannerAPIView.as_view()),
 
     # dirb urls
-    path('dirb-scan', dirb.DirBScannerAPIView.as_view()),
+    path('dirby-scan', dirby.DirByScannerAPIView.as_view()),
 
     # wafwoof urls
     path('wafwoof-scan', wafwoof.WafWoofScannerAPIView.as_view()),

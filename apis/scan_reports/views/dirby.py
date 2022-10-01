@@ -3,10 +3,10 @@ from rest_framework import permissions
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from apis.utils import responses, error_logs
-from apis.scan_reports.tools.dirb import DirBScanner
+from apis.scan_reports.tools.dirby import DirByScanner
 
 
-class DirBScannerAPIView(APIView):
+class DirByScannerAPIView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
@@ -19,10 +19,10 @@ class DirBScannerAPIView(APIView):
             return responses.http_response_400('IP address not specified!')
         try:
             # scan ip address and return response
-            dirb = DirBScanner(ip_address)
+            dirb = DirByScanner(ip_address)
             data = dirb.response()
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
-            error_logs.logger.error('DirBScannerAPIView.get@Error')
+            error_logs.logger.error('DirByScannerAPIView.get@Error')
             error_logs.logger.error(e)
             return responses.http_response_500('An error occurred!')
