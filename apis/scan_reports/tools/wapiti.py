@@ -6,7 +6,7 @@ import json
 import subprocess
 
 from apis.utils.error_logs import logger
-from .base import Scanner
+from .base import Scanner, get_server_user
 
 
 class WapitiScanner(Scanner):
@@ -21,11 +21,8 @@ class WapitiScanner(Scanner):
         
         
     def change_directory(self):
-        # change directory to ~/ (/home/{$username})
-        self.server_os.chdir("../")
-
         # cd to the wapiti directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
+        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
         
     
     def mkdir_ip_scans_dir(self):
@@ -36,7 +33,6 @@ class WapitiScanner(Scanner):
                            capture_output=True,
                            shell=True,
                            check=True)
-            
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
             # ip_scans directory has already been created
@@ -55,18 +51,18 @@ class WapitiScanner(Scanner):
         
         # create json file for the ip to be scanned
         try:
-            subprocess.run(f'type > {self.output_file}', 
+            self.cmd.run(f'type > {self.output_file}',
                         capture_output=True,
                             shell=True,
                             check=True)
         except subprocess.CalledProcessError:
-            # if `type > {out_file}` command raises an error, skip because
-            # out_file has already been created
+            # if `type > {output_file}` command raises an error, skip because
+            # output_file has already been created
             pass
         
-        scan_output = subprocess.run(f"wapiti -u https://{self.ip_address}/"
-                                 f" -f json -o /home/{self.server_user}/tools/{self.tool}/ip_scans/{self.output_file}",
-                                 shell=True)
+        self.cmd.run(f"wapiti -u https://{self.ip_address}/"
+                        f" -f json -o /home/{get_server_user()}/tools/{self.tool}/ip_scans/{self.output_file}",
+                        shell=True)
         
         # open the JSON file to ensure it was created.
         with open(self.output_file, 'r') as f:
@@ -75,7 +71,7 @@ class WapitiScanner(Scanner):
             wapiti_result = json.loads(json_output)
             
             results = self.get_host_port_list(wapiti_result)
-            return results
+        return results
         
     def response(self):
         """return result in json format"""
@@ -106,8 +102,6 @@ class WapitiScanner(Scanner):
 
             logger.error("Key Error")
             logger.error(e)
-            return {"Response":f"Scan result does not contain {e}"}
+            return {"Response": f"Scan result does not contain {e}"}
             
         return self.data
-        
-            

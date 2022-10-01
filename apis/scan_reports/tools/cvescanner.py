@@ -8,7 +8,7 @@ import subprocess
 import xmltodict
 import re
 from apis.utils.error_logs import logger
-from .base import Scanner
+from .base import Scanner, get_server_user
 
 
 class CVEScanner(Scanner):
@@ -26,7 +26,7 @@ class CVEScanner(Scanner):
         self.server_os.chdir("../")
 
         # cd to the CVEScannerV2 directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
+        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""
@@ -156,7 +156,7 @@ class CVEScanner(Scanner):
         except KeyError as e:  # either host is down
             # or no open ports or CVEScan data
 
-            # delete the created file if an error occured.
+            # delete the created file if an error occurred.
             subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
