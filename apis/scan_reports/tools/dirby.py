@@ -56,8 +56,11 @@ class DirByScanner(Scanner):
     def response(self):
         """return response"""
         data = json.loads(self.scan())
-        response = []
-        for d in data['report']:
-            if d['code'] < 400:
-                response.append(d)
+        report = filter(lambda x: x['code'] < 400, data['report'])
+        response = {
+            'base_url': data['base_url'],
+            'host': data['host'],
+            'port': data['port'],
+            'report': list(report)
+        }
         return response
