@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apis.scanners.views import cvescanner, dirby, wafwoof, wapiti, whatweb
+from apis.scanners.views import cvescanner, sslyze, dirby, wafwoof, wapiti, whatweb
 
 
 urlpatterns = [
@@ -16,6 +16,9 @@ urlpatterns = [
 
     # wapiti urls
     path('wapiti-scan', wapiti.WapitiScannerAPIView.as_view()),
+    
+    #sslyze urls
+    path('sslyze-scan', sslyze.SslyzeScannerAPIView.as_view()),
 
     # whatweb urls
     path('whatweb-scan', whatweb.WhatWebScannerAPIView.as_view()),

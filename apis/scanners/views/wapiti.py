@@ -17,6 +17,7 @@ class WapitiScannerAPIView(AuthProtectedAPIView):
             # scan ip address and return response
             wapiti = WapitiScanner(ip_address)
             data = wapiti.response()
+            print(data)
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
             error_logs.logger.error('WapitiScannerAPIView.get@Error')

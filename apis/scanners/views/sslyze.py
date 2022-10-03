@@ -4,9 +4,9 @@ from apis.scanners.tools.sslyze import SslyzeScanner
 from .base import AuthProtectedAPIView
 
 
-class SslyzeAPIView(AuthProtectedAPIView):
+class SslyzeScannerAPIView(AuthProtectedAPIView):
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         query_params = request.query_params
 
         # get ip_address from the url query parameters
@@ -17,6 +17,7 @@ class SslyzeAPIView(AuthProtectedAPIView):
             # scan ip address and return response
             sslyze_scan = SslyzeScanner(ip_address)
             data = sslyze_scan.response()
+            print(data)
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
             error_logs.logger.error('SslyzeAPIView.get@Error')
