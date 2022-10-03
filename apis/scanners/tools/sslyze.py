@@ -13,11 +13,7 @@ class SslyzeScanner(Scanner):
     """script to execute SSLYZE command to scan an IP address."""
     
     def __init__(self, ip_address: str, tool='sslyze'):
-<<<<<<< HEAD:apis/scan_reports/tools/sslyze.py
         super(SslyzeScanner, self).__init__(ip_address, tool)
-=======
-        super(SslyzeScanner, self).__init__(tool, ip_address)
->>>>>>> 6f89792cbaabf20b79d8aa4692be90f2723c1929:apis/scanners/tools/sslyze.py
         self.ip_address = ip_address
         self.output_file = f'{ip_address}.json'
         self.data = []
@@ -25,14 +21,8 @@ class SslyzeScanner(Scanner):
 
     def change_directory(self):
         # cd to the SSLYZE directory
-<<<<<<< HEAD:apis/scan_reports/tools/sslyze.py
         self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}_result")
-        
-    
-=======
-        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
->>>>>>> 6f89792cbaabf20b79d8aa4692be90f2723c1929:apis/scanners/tools/sslyze.py
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""
         try:
@@ -150,8 +140,5 @@ class SslyzeScanner(Scanner):
         self.data.append(result)
         
         return self.data
-<<<<<<< HEAD:apis/scan_reports/tools/sslyze.py
-        
     
-=======
->>>>>>> 6f89792cbaabf20b79d8aa4692be90f2723c1929:apis/scanners/tools/sslyze.py
+    
