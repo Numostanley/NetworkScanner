@@ -1,34 +1,32 @@
 from django.db import models
 from django.utils.timezone import now
 
-from .base import IPAddress
+from .base import Host
 
 
 class DirBy(models.Model):
-    ip_address = models.ForeignKey(IPAddress, related_name='dirby', on_delete=models.CASCADE)
+    host = models.ForeignKey(Host, related_name='dirby', on_delete=models.CASCADE)
 
     base_url = models.URLField()
-    host = models.CharField(max_length=255)
     port = models.IntegerField()
     report = models.JSONField(default=dict)
 
     date_created = models.DateTimeField(default=now)
 
     @staticmethod
-    def create_dirby_scan(ip_address: IPAddress, data: dict):
+    def create_dirby_scan(host: Host, data: dict):
         """create a dirby scan result"""
         return DirBy.objects.create(
-            ip_address=ip_address,
+            host=host,
             base_url=data['base_url'],
-            host=data['host'],
             port=data['port'],
             report=data['report']
         )
 
     @staticmethod
-    def get_dirby_scan_by_ip_address(ip_address: IPAddress):
+    def get_dirby_scan_by_ip_address(host: Host):
         """retrieve dirby scans in reverse chronological order"""
-        return DirBy.objects.filter(ip_address__ip_address__exact=ip_address).order_by('-date_created').all()
+        return DirBy.objects.filter(host__ip_address__exact=host).order_by('-date_created').all()
 
     def __str__(self):
-        return f'{self.ip_address.ip_address}'
+        return f'{self.host.ip_address}'
