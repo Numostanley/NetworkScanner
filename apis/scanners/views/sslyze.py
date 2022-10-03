@@ -1,16 +1,12 @@
-from rest_framework.views import APIView
-from rest_framework import permissions
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
 from apis.utils import responses, error_logs
-from apis.scan_reports.tools.wapiti import WapitiScanner
+from apis.scanners.tools.sslyze import SslyzeScanner
+
+from .base import AuthProtectedAPIView
 
 
-class WapitiScannerAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+class SslyzeAPIView(AuthProtectedAPIView):
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         query_params = request.query_params
 
         # get ip_address from the url query parameters
@@ -19,10 +15,10 @@ class WapitiScannerAPIView(APIView):
             return responses.http_response_400('IP address not specified!')
         try:
             # scan ip address and return response
-            wapiti = WapitiScanner(ip_address)
-            data = wapiti.response()
+            sslyze_scan = SslyzeScanner(ip_address)
+            data = sslyze_scan.response()
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
-            error_logs.logger.error('WapitiScannerAPIView.get@Error')
+            error_logs.logger.error('SslyzeAPIView.get@Error')
             error_logs.logger.error(e)
             return responses.http_response_500('An error occurred!')

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apis.scan_reports.views import cvescanner, dirby, wafwoof, wapiti, whatweb
+from apis.scanners.views import cvescanner, dirby, wafwoof, wapiti, whatweb
 
 
 urlpatterns = [

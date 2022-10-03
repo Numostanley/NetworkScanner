@@ -1,14 +1,10 @@
-from rest_framework.views import APIView
-from rest_framework import permissions
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
 from apis.utils import responses, error_logs
-from apis.scan_reports.tools.whatweb import WhatWebScanner
+from apis.scanners.tools.wapiti import WapitiScanner
+
+from .base import AuthProtectedAPIView
 
 
-class WhatWebScannerAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+class WapitiScannerAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
@@ -19,10 +15,10 @@ class WhatWebScannerAPIView(APIView):
             return responses.http_response_400('IP address not specified!')
         try:
             # scan ip address and return response
-            whatweb = WhatWebScanner(ip_address)
-            data = whatweb.response()
+            wapiti = WapitiScanner(ip_address)
+            data = wapiti.response()
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
-            error_logs.logger.error('WhatWebScannerAPIView.get@Error')
+            error_logs.logger.error('WapitiScannerAPIView.get@Error')
             error_logs.logger.error(e)
             return responses.http_response_500('An error occurred!')

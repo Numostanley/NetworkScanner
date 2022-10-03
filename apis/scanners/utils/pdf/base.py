@@ -67,7 +67,7 @@ class PDFGenerator(AbstractBasePDFGenerator):
         self.tool_static_file = tool_static_file.lower()
 
     def get_app_dir(self) -> Path:
-        """retrieve application directory i.e (scan_reports app)"""
+        """retrieve application directory i.e (scanners app)"""
         app_dir = Path(__file__).resolve().parent.parent.parent
         return app_dir
 
@@ -114,17 +114,17 @@ class PDFGenerator(AbstractBasePDFGenerator):
 
         # generate pdf
         html.write_pdf(
-            f'file_downloads/scan_reports/{self.tool}/scan_report_on_{self.ip_address}.pdf',
+            f'file_downloads/scanners/{self.tool}/scan_report_on_{self.ip_address}.pdf',
             stylesheets=[self.locate_static()]
         )
 
         # create file_downloads/scan_report_statement/{self.tool}
         # folder in the project root directory if it does not exist
-        Path(f'file_downloads/scan_reports/{self.tool}').mkdir(exist_ok=True, parents=True)
+        Path(f'file_downloads/scanners/{self.tool}').mkdir(exist_ok=True, parents=True)
 
         # return pdf path
         file_name = f'{root_dir}/file_downloads/' \
-                    f'scan_reports/{self.tool}/scan_report_on_{self.ip_address}.pdf'
+                    f'scanners/{self.tool}/scan_report_on_{self.ip_address}.pdf'
         return file_name
 
     def delete_pdf(self):

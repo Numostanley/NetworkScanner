@@ -6,28 +6,23 @@ import json
 import subprocess
 
 from apis.utils.error_logs import logger
-from .base import Scanner
+from .base import Scanner, get_server_user
 
 
 class SslyzeScanner(Scanner):
     """script to execute SSLYZE command to scan an IP address."""
     
     def __init__(self, ip_address: str, tool='sslyze'):
-        super().__init__(tool, ip_address)
+        super(SslyzeScanner, self).__init__(tool, ip_address)
         self.ip_address = ip_address
         self.output_file = f'{ip_address}.json'
         self.data = []
         self.tool = tool
-    
-    
-    def change_directory(self):
-        # change directory to ~/ (/home/{$username})
-        self.server_os.chdir("../")
 
+    def change_directory(self):
         # cd to the SSLYZE directory
-        self.server_os.chdir(f"/home/{self.server_user}/tools/{self.tool}")
-        
-    
+        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
+
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""
         try:
@@ -40,7 +35,6 @@ class SslyzeScanner(Scanner):
             # if `mkdir ip_scans` command raises an error, skip because
             # ip_scans directory has already been created
             pass
-        
     
     def scan(self):
         """run the scan on the specified ip address"""
@@ -50,7 +44,7 @@ class SslyzeScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
         
-        scan_output = subprocess.run(f'python3 -m sslyze {self.ip_address} '
+        self.cmd.run(f'python3 -m sslyze {self.ip_address} '
                                  f'--json_out=ip_scans/{self.output_file}',
                                  shell=True)   
 
@@ -66,19 +60,16 @@ class SslyzeScanner(Scanner):
 
             results = self.get_host_port_list(sslyze_result)
             return results
-    
-    
+
     def response(self):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
-    
-    
+
     def get_host_port_list(self, sslyze_result):
         """
         retrieve list of ports from the result
         """
-        
         try:
         
             if sslyze_result["server_scan_results"][0]["scan_status"] == "ERROR_NO_CONNECTIVITY":
@@ -90,7 +81,7 @@ class SslyzeScanner(Scanner):
                             shell=True,
                             check=True)
                 
-                return {"Response":"ERROR_NO_CONNECTIVITY"}
+                return {"Response": "ERROR_NO_CONNECTIVITY"}
             
             elif sslyze_result["server_scan_results"][0]["scan_status"] == "COMPLETED":
                 
@@ -133,7 +124,7 @@ class SslyzeScanner(Scanner):
                         shell=True,
                         check=True)
                     
-                    return {"Response":"SCAN_RESULT_CERTIFICATE_INFO_ERROR"}
+                    return {"Response": "SCAN_RESULT_CERTIFICATE_INFO_ERROR"}
                 
         except KeyError as e:
             # delete the created file if an error occured.
@@ -144,10 +135,8 @@ class SslyzeScanner(Scanner):
 
             logger.error("Key Error")
             logger.error(e)
-            return {"Response":f"Scan result does not contain {e}"}
+            return {"Response": f"Scan result does not contain {e}"}
             
         self.data.append(result)
         
         return self.data
-        
-     
