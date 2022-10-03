@@ -2,11 +2,13 @@ import os
 
 from celery import Celery
 
+from core.extras import env_vars
+
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.base')
 
-app = Celery('core')
+app = Celery('core', broker=env_vars.REDIS_URL, backend=env_vars.REDIS_URL)
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.

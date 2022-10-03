@@ -6,5 +6,5 @@ from the `core.settings.base`
 from core.settings.base import env_config
 
 
-# Server Username
-SERVER_USER = env_config['SERVER_USER']
+# REDIS URL
+REDIS_URL = env_config['REDIS_URL']
