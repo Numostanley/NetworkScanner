@@ -22,9 +22,6 @@ class CVEScanner(Scanner):
         self.tool = tool
 
     def change_directory(self):
-        # change directory to ~/ (/home/{$username})
-        self.server_os.chdir("../")
-
         # cd to the CVEScannerV2 directory
         self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
@@ -122,7 +119,7 @@ class CVEScanner(Scanner):
                     item_elements = first_item['elem']
 
                     cve_results = item_elements[5:]
-                    CvE_Data = []
+                    cve_data = []
 
                     for item in cve_results:
                         cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
@@ -135,13 +132,13 @@ class CVEScanner(Scanner):
                             "metasploit": metasploit.strip()
                         }
 
-                        CvE_Data.append(cve_dict)
+                        cve_data.append(cve_dict)
 
                     result.update({
                         "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "CVE_Data": CvE_Data
+                        "CVE_Data": cve_data
                     })
 
                 self.data.append(result)
@@ -162,7 +159,7 @@ class CVEScanner(Scanner):
                         shell=True,
                         check=True)
 
-            logger.error("Key Error")
+            logger.error("CVEScanner.get_host_port_list@Error")
             logger.error(e)
             return {"message": "host is either down or has no open ports or CVEScan data"}
 

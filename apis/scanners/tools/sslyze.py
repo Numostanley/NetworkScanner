@@ -75,7 +75,7 @@ class SslyzeScanner(Scanner):
             if sslyze_result["server_scan_results"][0]["scan_status"] == "ERROR_NO_CONNECTIVITY":
                 # No connection was made with the server
                 
-                # delete the created file if an error occured.
+                # delete the created file if an error occurred.
                 subprocess.run(f'rm -f {self.output_file}',
                             capture_output=True,
                             shell=True,

@@ -17,7 +17,6 @@ class SslyzeScannerAPIView(AuthProtectedAPIView):
             # scan ip address and return response
             sslyze_scan = SslyzeScanner(ip_address)
             data = sslyze_scan.response()
-            print(data)
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
             error_logs.logger.error('SslyzeAPIView.get@Error')

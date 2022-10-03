@@ -8,7 +8,7 @@ urlpatterns = [
     path('cve-download', cvescanner.CVEDownloadScanReportAPIView.as_view()),
     path('cve-scan', cvescanner.CVEScannerAPIView.as_view()),
 
-    # dirb urls
+    # dirby urls
     path('dirby-scan', dirby.DirByScannerAPIView.as_view()),
 
     # wafwoof urls

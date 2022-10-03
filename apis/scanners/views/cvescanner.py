@@ -20,7 +20,6 @@ class CVEScannerAPIView(AuthProtectedAPIView):
             # scan ip address and return response
             cvescanner = CVEScanner(ip_address)
             data = cvescanner.response()
-            print(data)
             return responses.http_response_200('Scan successful', data)
         except Exception as e:
             error_logs.logger.error('CVEScannerAPIView.get@Error')
