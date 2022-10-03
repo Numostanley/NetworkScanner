@@ -64,8 +64,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
-    'apis.base',
-    'apis.scan_reports',
+    'apis.scanners',
 ]
 
 MIDDLEWARE = [

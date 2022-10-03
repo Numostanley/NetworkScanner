@@ -28,8 +28,7 @@ admin_urls = [
 
 # api urls
 api_urls = [
-    path('', include('apis.base.urls')),
-    path('scan-reports/', include('apis.scan_reports.urls')),
+    path('scanners/', include('apis.scanners.urls')),
 ]
 
 api_version_one = get_api_version(base.API_VERSIONS, 'v1')

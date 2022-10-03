@@ -1,16 +1,13 @@
 from django.http import FileResponse
-from rest_framework.views import APIView
-from rest_framework import permissions
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from apis.utils import responses, error_logs
-from apis.scan_reports.tools.cvescanner import CVEScanner
-from apis.scan_reports.utils.pdf.cvescanner import CVEScannerPDFGenerator
+from apis.scanners.tools.cvescanner import CVEScanner
+from apis.scanners.utils.pdf.cvescanner import CVEScannerPDFGenerator
+
+from .base import AuthProtectedAPIView
 
 
-class CVEScannerAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+class CVEScannerAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
@@ -30,9 +27,7 @@ class CVEScannerAPIView(APIView):
             return responses.http_response_500('An error occurred!')
 
 
-class CVEDownloadScanReportAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+class CVEDownloadScanReportAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
