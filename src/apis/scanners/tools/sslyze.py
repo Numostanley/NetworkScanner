@@ -11,7 +11,7 @@ from .base import Scanner, get_server_user
 
 class SslyzeScanner(Scanner):
     """script to execute SSLYZE command to scan an IP address."""
-    
+
     def __init__(self, ip_address: str, tool='sslyze'):
         super(SslyzeScanner, self).__init__(ip_address, tool)
         self.ip_address = ip_address
@@ -65,6 +65,9 @@ class SslyzeScanner(Scanner):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
+
+    def run(self, *args, **kwargs):
+        self.response()
 
     def get_host_port_list(self, sslyze_result):
         """

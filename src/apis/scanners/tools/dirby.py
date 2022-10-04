@@ -17,7 +17,7 @@ class DirByScanner(Scanner):
         self.tool = tool
 
     def change_directory(self):
-        # change directory to `/home/{$username}/tools/WhatWeb` directory
+        # change directory to `/home/{$username}/tools/dirby` directory
         self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
     def mkdir_ip_scans_dir(self):
@@ -41,7 +41,7 @@ class DirByScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
 
-        # execute dirby.py
+        # execute test_dirby.py
         self.cmd.run(f'python3 dirby.py --scheme https --host {self.ip_address} --port 443 '
                      '--wordlist ./wordlists/common.txt > ip_scans/result.json',
                      shell=True)
@@ -64,3 +64,6 @@ class DirByScanner(Scanner):
             'report': list(report)
         }
         return response
+
+    def run(self, *args, **kwargs):
+        self.response()

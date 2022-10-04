@@ -3,10 +3,11 @@ import os
 from celery import Celery
 
 from core.extras import env_vars
+from core.settings import get_settings_environment
 
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.base')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'{get_settings_environment()}')
 
 app = Celery('core', broker=env_vars.REDIS_URL, backend=env_vars.REDIS_URL)
 
@@ -14,7 +15,7 @@ app = Celery('core', broker=env_vars.REDIS_URL, backend=env_vars.REDIS_URL)
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
-app.config_from_object('core.settings.base', namespace='CELERY')
+app.config_from_object(f'{get_settings_environment()}', namespace='CELERY')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()

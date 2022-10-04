@@ -8,6 +8,8 @@ import subprocess
 
 from abc import ABC, abstractmethod
 
+from celery import Task
+
 
 def get_server_user():
     """
@@ -17,7 +19,7 @@ def get_server_user():
     return getpass.getuser()
 
 
-class Scanner(ABC):
+class Scanner(Task, ABC):
     """
     cmd: to execute subprocess module commands
     server_os: to execute os module functions
