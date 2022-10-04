@@ -3,10 +3,11 @@ script to run the CVEScannerV2 scan on the ip addresses
 """
 
 import json
+import re
 import subprocess
 
 import xmltodict
-import re
+
 from apis.utils.error_logs import logger
 from .base import Scanner, get_server_user
 
@@ -68,6 +69,9 @@ class CVEScanner(Scanner):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
+
+    def run(self, *args, **kwargs):
+        self.response()
 
     def get_host_port_list(self, nmap_results):
         """

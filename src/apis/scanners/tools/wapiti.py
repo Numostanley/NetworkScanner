@@ -18,13 +18,11 @@ class WapitiScanner(Scanner):
         self.output_file = f'{ip_address}.json'
         self.data = []
         self.tool = tool
-        
-        
+
     def change_directory(self):
         # cd to the wapiti directory
         self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
-        
-    
+
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""
         try:
@@ -37,7 +35,7 @@ class WapitiScanner(Scanner):
             # if `mkdir ip_scans` command raises an error, skip because
             # ip_scans directory has already been created
             pass
-        
+
     def scan(self):
         """run the scan on the specified ip address"""
         # change directory
@@ -77,7 +75,9 @@ class WapitiScanner(Scanner):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
-    
+
+    def run(self, *args, **kwargs):
+        self.response()
     
     def get_host_port_list(self, wapiti_result):
         """

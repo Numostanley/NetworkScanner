@@ -1,7 +1,7 @@
 from django.http import FileResponse
 
 from apis.utils import responses, error_logs
-from apis.scanners.tools.cvescanner import CVEScanner
+from apis.scanners.tasks import cvescanner_task
 from apis.scanners.utils.pdf.cvescanner import CVEScannerPDFGenerator
 
 from .base import AuthProtectedAPIView
@@ -17,10 +17,9 @@ class CVEScannerAPIView(AuthProtectedAPIView):
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
         try:
-            # scan ip address and return response
-            cvescanner = CVEScanner(ip_address)
-            data = cvescanner.response()
-            return responses.http_response_200('Scan successful', data)
+            # scan ip address as background task
+            cvescanner_task.delay(ip_address)
+            return responses.http_response_200('Scan in progress...')
         except Exception as e:
             error_logs.logger.error('CVEScannerAPIView.get@Error')
             error_logs.logger.error(e)

@@ -5,10 +5,7 @@ for celery module: This will make sure the app is always imported when
 """
 
 from .base import base_env_config
-from .celery import app as celery_app
 
-
-__all__ = ('celery_app',)
 
 def get_settings_environment():
     # detect environment to load settings configuration
@@ -17,3 +14,9 @@ def get_settings_environment():
     else:
         ENV_SETTINGS = 'core.settings.dev'
     return ENV_SETTINGS
+
+
+from .celery import app as celery_app
+
+
+__all__ = ('celery_app',)
