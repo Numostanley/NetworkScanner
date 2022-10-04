@@ -57,6 +57,3 @@ class WafWoofScanner(Scanner):
     def response(self):
         """return response"""
         return json.loads(self.scan())
-
-    def run(self, *args, **kwargs):
-        self.response()

@@ -9,29 +9,29 @@ from apis.scanners.tools import cvescanner, dirby, sslyze, wafwoof, wapiti, what
 
 @shared_task
 def cvescanner_task(ip_address: str):
-    cvescanner.CVEScanner(ip_address).run()
+    return cvescanner.CVEScanner(ip_address).response()
 
 
 @shared_task
 def dirby_task(ip_address: str):
-    dirby.DirByScanner(ip_address).run()
+    return dirby.DirByScanner(ip_address).response()
 
 
 @shared_task
 def sslyze_task(ip_address: str):
-    sslyze.SslyzeScanner(ip_address).run()
+    return sslyze.SslyzeScanner(ip_address).response()
 
 
 @shared_task
 def wafwoof_task(ip_address: str):
-    wafwoof.WafWoofScanner(ip_address).run()
+    return wafwoof.WafWoofScanner(ip_address).response()
 
 
 @shared_task
 def wapiti_task(ip_address: str):
-    wapiti.WapitiScanner(ip_address).run()
+    return wapiti.WapitiScanner(ip_address).response()
 
 
 @shared_task
 def whatweb_task(ip_address: str):
-    whatweb.WhatWebScanner(ip_address).run()
+    return whatweb.WhatWebScanner(ip_address).response()

@@ -75,9 +75,6 @@ class WapitiScanner(Scanner):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
-
-    def run(self, *args, **kwargs):
-        self.response()
     
     def get_host_port_list(self, wapiti_result):
         """

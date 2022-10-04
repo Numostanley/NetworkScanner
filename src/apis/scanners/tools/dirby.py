@@ -64,6 +64,3 @@ class DirByScanner(Scanner):
             'report': list(report)
         }
         return response
-
-    def run(self, *args, **kwargs):
-        self.response()
