@@ -1,5 +1,5 @@
 from apis.utils import responses, error_logs
-from apis.scanners.tools.wafwoof import WafWoofScanner
+from apis.scanners.tasks import wafwoof_task
 
 from .base import AuthProtectedAPIView
 
@@ -14,10 +14,9 @@ class WafWoofScannerAPIView(AuthProtectedAPIView):
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
         try:
-            # scan ip address and return response
-            wafwoof = WafWoofScanner(ip_address)
-            data = wafwoof.response()
-            return responses.http_response_200('Scan successful', data)
+            # scan ip address as background task
+            wafwoof_task.delay(ip_address)
+            return responses.http_response_200('Scan in progress...')
         except Exception as e:
             error_logs.logger.error('WafWoofScannerAPIView.get@Error')
             error_logs.logger.error(e)

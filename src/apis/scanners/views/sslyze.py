@@ -1,5 +1,5 @@
 from apis.utils import responses, error_logs
-from apis.scanners.tools.sslyze import SslyzeScanner
+from apis.scanners.tasks import sslyze_task
 
 from .base import AuthProtectedAPIView
 
@@ -14,10 +14,9 @@ class SslyzeScannerAPIView(AuthProtectedAPIView):
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
         try:
-            # scan ip address and return response
-            sslyze_scan = SslyzeScanner(ip_address)
-            data = sslyze_scan.response()
-            return responses.http_response_200('Scan successful', data)
+            # scan ip address as background task
+            sslyze_task.delay(ip_address)
+            return responses.http_response_200('Scan in progress...')
         except Exception as e:
             error_logs.logger.error('SslyzeAPIView.get@Error')
             error_logs.logger.error(e)

@@ -1,5 +1,5 @@
 from apis.utils import responses, error_logs
-from apis.scanners.tools.whatweb import WhatWebScanner
+from apis.scanners.tasks import whatweb_task
 
 from .base import AuthProtectedAPIView
 
@@ -14,10 +14,9 @@ class WhatWebScannerAPIView(AuthProtectedAPIView):
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
         try:
-            # scan ip address and return response
-            whatweb = WhatWebScanner(ip_address)
-            data = whatweb.response()
-            return responses.http_response_200('Scan successful', data)
+            # scan ip address as background task
+            whatweb_task.delay(ip_address)
+            return responses.http_response_200('Scan in progress...')
         except Exception as e:
             error_logs.logger.error('WhatWebScannerAPIView.get@Error')
             error_logs.logger.error(e)
