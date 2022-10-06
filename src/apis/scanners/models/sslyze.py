@@ -7,12 +7,10 @@ from .base import Host
 class SSLyze(models.Model):
     host = models.ForeignKey(Host, related_name='sslyze', on_delete=models.CASCADE)
     
-    connection_type = models.CharField(max_length=10)
-    connectivity_error_trace = models.CharField(max_length=10)
+    connection_type = models.CharField(max_length=10, null=True)
+    connectivity_error_trace = models.CharField(max_length=10, null=True)
     connectivity_result = models.JSONField(default=dict)
     connectivity_status = models.CharField(max_length=20)
-    date_scans_completed = models.DateTimeField()
-    date_scans_started = models.DateTimeField()
     network_configuration = models.JSONField(default=dict)
     port = models.IntegerField()
     scan_result = models.JSONField(default=dict)
@@ -30,8 +28,7 @@ class SSLyze(models.Model):
             connectivity_error_trace=data['connectivity_error_trace'],
             connectivity_result=data['connectivity_result'],
             connectivity_status=data['connectivity_status'],
-            date_scans_completed=data['date_scans_completed'],
-            date_scans_started=data['date_scans_started'],
+            network_configuration=data['network_configuration'],
             port=data['port'],
             scan_result=data['scan_result'],
             scan_status=data['scan_status'],
