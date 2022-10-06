@@ -162,5 +162,3 @@ def whatweb_task(ip_address: str):
 
     # return the cleaned data
     return cleaned_data
-
-
