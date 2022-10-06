@@ -112,7 +112,7 @@ class CVEScanner(Scanner):
                         "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "CVE_Data": CvE_Data
+                        "CVE_Data": {"cve_data":CvE_Data}
                     })
 
                 if isinstance(nmap_script, list):
@@ -139,17 +139,10 @@ class CVEScanner(Scanner):
                         "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "CVE_Data": cve_data
+                        "CVE_Data": {"cve_data":cve_data}
                     })
 
                 self.data.append(result)
-
-            end_time = nmap_results['nmaprun']['host']['@endtime']
-            start_time = nmap_results['nmaprun']['host']['@starttime']
-
-            scan_time = {"Scan time": f"{int(end_time) - int(start_time)} secs"}
-
-            self.data.append(scan_time)
 
         except KeyError as e:  # either host is down
             # or no open ports or CVEScan data

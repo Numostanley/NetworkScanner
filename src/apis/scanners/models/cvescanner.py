@@ -13,31 +13,27 @@ class CVEScannerV2(models.Model):
     version = models.CharField(max_length=100)
 
     cves = models.CharField(max_length=20)
-    cveid = models.CharField(max_length=50)
-    cvssv2 = models.CharField(max_length=20)
-    cvssv3 = models.CharField(max_length=20)
-
-    exploit_db = models.CharField(max_length=10)
-    metasploit = models.CharField(max_length=10)
+    cve_data = models.JSONField(default=dict)
 
     date_created = models.DateTimeField(default=now)
 
     @staticmethod
     def create_cvescanner_scan(host: Host, data: list):
         """create a cvescanner scan result"""
-        cvescanner = CVEScannerV2()
+        
         for datum in data:
+            cvescanner = CVEScannerV2()
+            
             cvescanner.host = host
             cvescanner.port= datum['port']
             cvescanner.state = datum['state']
-            cvescanner.service = datum['service']
+            cvescanner.service = datum['service-name']
             cvescanner.version = datum['version']
             cvescanner.cves = datum['cves']
-            cvescanner.cveid = datum['cveid']
-            cvescanner.cvssv2 = datum['cvssv2']
-            cvescanner.cvssv3 = datum['cvssv3']
-            cvescanner.exploit_db = datum['exploit_db']
-            cvescanner.metasploit = datum['metasploit']
+            cvescanner.cve_data = datum['CVE_Data']
+
+            cvescanner.save()
+            
         return cvescanner
 
     @staticmethod
