@@ -112,7 +112,7 @@ class CVEScanner(Scanner):
                         "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "CVE_Data": {"cve_data":CvE_Data}
+                        "CVE_Data": CvE_Data
                     })
 
                 if isinstance(nmap_script, list):
@@ -139,7 +139,7 @@ class CVEScanner(Scanner):
                         "Product": item_elements[0],
                         "version": item_elements[1],
                         "cves": item_elements[3],
-                        "CVE_Data": {"cve_data":cve_data}
+                        "CVE_Data": cve_data
                     })
 
                 self.data.append(result)
