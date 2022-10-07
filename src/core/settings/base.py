@@ -64,7 +64,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
-    'apis.scanners',
+    'apis.scanners.cvescannerv2',
+    'apis.scanners.dirby',
+    'apis.scanners.hosts',
+    'apis.scanners.sslyze',
+    'apis.scanners.wafw00f',
+    'apis.scanners.wapiti',
+    'apis.scanners.whatweb'
 ]
 
 MIDDLEWARE = [
