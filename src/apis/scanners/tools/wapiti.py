@@ -102,3 +102,4 @@ class WapitiScanner(Scanner):
             return {"Response": f"Scan result does not contain {e}"}
             
         return self.data
+
