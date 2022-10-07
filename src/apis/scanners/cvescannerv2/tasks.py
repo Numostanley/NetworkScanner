@@ -5,7 +5,6 @@ register cvescannerv2's task for celery to autodiscover
 import json
 
 from celery import shared_task
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 
 from apis.scanners.hosts.models import Host
@@ -22,7 +21,7 @@ def cvescanner_task(ip_address: str):
     try:
         # retrieve host ip address
         host = Host.get_host(ip_address=ip_address)
-    except ObjectDoesNotExist:
+    except Host.DoesNotExist:
         # if host ip address does not exist, create new host
         host = Host.create_host(
             ip_address=ip_address
