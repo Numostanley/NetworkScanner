@@ -21,7 +21,7 @@ class WhatWeb(models.Model):
     @staticmethod
     def get_whatweb_scan_by_ip_addr(host: Host):
         """retrieve whatweb scans in reverse chronological order"""
-        return WhatWeb.objects.filter(host__ip_address__iexact=host).order_by('-date_created').al()
+        return WhatWeb.objects.filter(host=host).values().order_by('-date_created')
 
     def __str__(self):
         return f'{self.host.ip_address}'
