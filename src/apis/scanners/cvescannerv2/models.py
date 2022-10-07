@@ -7,12 +7,6 @@ from apis.scanners.hosts.models import Host
 class CVEScannerV2(models.Model):
     host = models.ForeignKey(Host, related_name='cvescannerv2', on_delete=models.CASCADE)
 
-    port = models.CharField(max_length=10)
-    state = models.CharField(max_length=10)
-    service = models.CharField(max_length=20)
-    version = models.CharField(max_length=100)
-
-    cves = models.CharField(max_length=20)
     cve_data = models.JSONField(default=dict)
 
     date_created = models.DateTimeField(default=now)
@@ -21,16 +15,10 @@ class CVEScannerV2(models.Model):
     def create_cvescanner_scan(host: Host, data: list):
         """create a cvescanner scan result"""
 
-        for datum in data:
-            CVEScannerV2.objects.create(
-                host=host,
-                port=datum['port'],
-                state=datum['state'],
-                service=datum['service-name'],
-                version=datum['version'],
-                cves=datum['cves'],
-                cve_data=datum['CVE_Data']
-            )
+        CVEScannerV2.objects.create(
+            host=host,
+            cve_data={"cve_data":data}
+        )
 
     @staticmethod
     def get_cvescanner_by_host(host: Host):
