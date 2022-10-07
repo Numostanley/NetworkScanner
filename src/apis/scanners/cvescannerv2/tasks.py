@@ -20,7 +20,7 @@ def cvescanner_task(ip_address: str):
 
     try:
         # retrieve host ip address
-        host = Host.get_host(ip_address=ip_address)
+        host = Host.objects.get(ip_address=ip_address)
     except Host.DoesNotExist:
         # if host ip address does not exist, create new host
         host = Host.create_host(
