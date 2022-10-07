@@ -158,3 +158,4 @@ class CVEScanner(Scanner):
             return {"message": "host is either down or has no open ports or CVEScan data"}
 
         return self.data
+
