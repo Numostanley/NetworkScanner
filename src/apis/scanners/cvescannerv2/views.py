@@ -5,7 +5,6 @@ from apis.scanners.utils.pdf.cvescanner import CVEScannerPDFGenerator
 from apis.utils.views import AuthProtectedAPIView
 from apis.scanners.hosts.models import Host
 from .models import CVEScannerV2
-
 from .tasks import cvescanner_task
 
 
@@ -75,13 +74,15 @@ class CVEScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_400('IP address not specified!')
         
         host = Host.get_host(ip_address=ip_address)
+        if not host:
+            return responses.http_response_404('Host not found!')
+
         cve_data = CVEScannerV2.get_cvescanner_by_host(host=host)
         
         if cve_data.count() < 1:
             return responses.http_response_404("No scan result exists for this IP address.")
-        
-        return responses.http_response_200('data successfully retrieved',cve_data)
-            
-        
-        
 
+        if cve_data.count() > 0:
+            return responses.http_response_200('Data successfully retrieved', cve_data)
+
+        return responses.http_response_500('An error occurred!')
