@@ -25,7 +25,7 @@ class WhatWebScannerAPIView(AuthProtectedAPIView):
             return responses.http_response_500('An error occurred!')
 
 
-class DirByScanResultAPIView(AuthProtectedAPIView):
+class WhatWebScanResultAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params

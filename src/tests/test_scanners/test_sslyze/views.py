@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .test_base import BASE_URL
+from tests.test_scanners import BASE_URL
 
 
 class SslyzeTest(TestCase):

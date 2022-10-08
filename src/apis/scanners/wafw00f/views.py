@@ -25,7 +25,7 @@ class WafWoofScannerAPIView(AuthProtectedAPIView):
             return responses.http_response_500('An error occurred!')
 
 
-class DirByScanResultAPIView(AuthProtectedAPIView):
+class WafW00fScanResultAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
