@@ -26,7 +26,7 @@ class Wapiti(models.Model):
     @staticmethod
     def get_wapiti_scan_by_ip_address(host: Host):
         """retrieve wapiti scans in reverse chronological order"""
-        return Wapiti.objects.filter(host__ip_address__exact=host).order_by('-date_created').all()
+        return Wapiti.objects.filter(host=host).values().order_by('-date_created')
 
     def __str__(self):
         return f'{self.host.ip_address}'

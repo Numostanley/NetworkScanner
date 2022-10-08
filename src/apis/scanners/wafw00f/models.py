@@ -29,7 +29,7 @@ class WafWoof(models.Model):
     @staticmethod
     def get_wafw00f_scan_by_ip_address(host: Host):
         """retrieve wafw00f scans in reverse chronological order"""
-        return WafWoof.objects.filter(host__ip_address__exact=host).order_by('-date_created').all()
+        return WafWoof.objects.filter(host=host).values().order_by('-date_created')
 
     def __str__(self):
         return f'{self.host.ip_address}'

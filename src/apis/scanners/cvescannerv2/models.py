@@ -23,7 +23,7 @@ class CVEScannerV2(models.Model):
     @staticmethod
     def get_cvescanner_by_host(host: Host):
         """retrieve cvescanner scans in reverse chronological order"""
-        return CVEScannerV2.objects.filter(host__ip_address__exact=host).order_by('-date_created').all()
+        return CVEScannerV2.objects.filter(host=host).values().order_by('-date_created')
 
     def __str__(self):
         return f'{self.host.ip_address}'
