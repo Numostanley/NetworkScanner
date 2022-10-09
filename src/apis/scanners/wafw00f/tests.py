@@ -8,6 +8,9 @@ class WafW00fTest(TestCase):
     def test_wafw00f(self):
         view = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=193.122.67.133')
         self.assertEqual(view.status_code, 200)
+        
+        response_400 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=')
+        self.assertEqual(response_400.status_code, 400)
 
     def test_wafw00f_scan_result_api_view(self):
         response_400 = self.client.get(f'{BASE_URL}/wafwoof/get-result?ip_address=')
