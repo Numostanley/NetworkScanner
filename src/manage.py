@@ -24,4 +24,3 @@ sys.path.append(os.path.join(base.BASE_DIR, 'apis'))
 
 if __name__ == '__main__':
     main()
-
