@@ -2,9 +2,16 @@ from django.test import TestCase
 
 from apis.scanners.base.tests import BASE_URL
 from apis.scanners.hosts.models import Host
+from .models import DirBy
 
 
 class DirbyTest(TestCase):
+
+
+
+
+    # def setUp(self) -> None:
+    #     host = Host.create_host(ip_address='193.122.66.53')
 
     def test_dirby_scanner_api_view(self):
         response = self.client.get(f'{BASE_URL}/dirby/scan?ip_address=193.122.67.133')
