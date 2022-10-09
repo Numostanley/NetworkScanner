@@ -7,9 +7,7 @@ from apis.scanners.hosts.models import Host
 class DirBy(models.Model):
     host = models.ForeignKey(Host, related_name='dirby', on_delete=models.CASCADE)
 
-    base_url = models.URLField()
-    port = models.IntegerField()
-    report = models.JSONField(default=dict)
+    data = models.JSONField(default=dict)
 
     date_created = models.DateTimeField(default=now)
 
@@ -18,9 +16,7 @@ class DirBy(models.Model):
         """create a dirby scan result"""
         return DirBy.objects.create(
             host=host,
-            base_url=data['base_url'],
-            port=data['port'],
-            report=data['report']
+            data=data
         )
 
     @staticmethod
