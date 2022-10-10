@@ -1,0 +1,258 @@
+[
+{
+    "model": "wapiti.wapiti",
+    "pk": 1,
+    "fields": {
+        "host": 1,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 18:43:11 +0000",
+            "scope": "folder",
+            "target": "https://193.122.66.53/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T18:43:17.086Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 2,
+    "fields": {
+        "host": 3,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:27:56 +0000",
+            "scope": "folder",
+            "target": "https://158.101.229.145/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:28:02.838Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 3,
+    "fields": {
+        "host": 3,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:28:43 +0000",
+            "scope": "folder",
+            "target": "https://158.101.229.145/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:28:49.056Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 4,
+    "fields": {
+        "host": 3,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:49:07 +0000",
+            "scope": "folder",
+            "target": "https://158.101.229.145/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:49:13.018Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 5,
+    "fields": {
+        "host": 3,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:54:15 +0000",
+            "scope": "folder",
+            "target": "https://158.101.229.145/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:54:20.656Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 6,
+    "fields": {
+        "host": 3,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:54:59 +0000",
+            "scope": "folder",
+            "target": "https://158.101.229.145/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:55:04.436Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 7,
+    "fields": {
+        "host": 4,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 20:56:22 +0000",
+            "scope": "folder",
+            "target": "https://193.122.65.200/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T20:56:27.266Z"
+    }
+},
+{
+    "model": "wapiti.wapiti",
+    "pk": 8,
+    "fields": {
+        "host": 1,
+        "vulnerabilities": {
+            "Backup file": [],
+            "Blind SQL Injection": [],
+            "CRLF Injection": [],
+            "Commands execution": [],
+            "Cross Site Scripting": [],
+            "File Handling": [],
+            "Htaccess Bypass": [],
+            "Open Redirect": [],
+            "Potentially dangerous file": [],
+            "SQL Injection": [],
+            "Server Side Request Forgery": [],
+            "XXE": []
+        },
+        "anomalies": {
+            "Internal Server Error": [],
+            "Resource consumption": []
+        },
+        "infos": {
+            "date": "Fri, 07 Oct 2022 21:08:25 +0000",
+            "scope": "folder",
+            "target": "https://193.122.66.53/",
+            "version": "Wapiti 3.0.3"
+        },
+        "date_created": "2022-10-07T21:08:30.715Z"
+    }
+}
+]
