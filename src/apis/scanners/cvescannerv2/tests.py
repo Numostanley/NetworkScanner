@@ -50,4 +50,3 @@ class CVEScannerTest(TestCase):
         cve_data= cvescanner._meta.get_field('cve_data').get_internal_type()
         self.assertEqual(cve_data, 'JSONField')
         
-        
