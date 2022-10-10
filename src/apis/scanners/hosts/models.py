@@ -4,6 +4,7 @@ from django.utils.timezone import now
 
 class Host(models.Model):
     ip_address = models.GenericIPAddressField(protocol='both', unique=True, db_index=True)
+    host_name = models.URLField(default='')
 
     date_created = models.DateTimeField(default=now)
 
