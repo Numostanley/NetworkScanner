@@ -39,5 +39,3 @@ class DirbyTest(TestCase):
             self.assertEqual(response.status_code, 404)
         if self.dirby_scan.count() > 0:
             self.assertEqual(response.status_code, 200)
-            
-            
