@@ -52,6 +52,9 @@ API_PREFIX = env_config['API_PREFIX']
 API_VERSIONS = env_config['API_VERSIONS']
 APPEND_SLASH = False
 
+# Fixtures data for testing
+FIXTURE_DIRS = [f'{BASE_DIR}/fixtures/']
+
 # Application definition
 
 INSTALLED_APPS = [

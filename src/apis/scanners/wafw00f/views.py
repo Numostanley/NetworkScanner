@@ -42,9 +42,10 @@ class WafW00fScanResultAPIView(AuthProtectedAPIView):
         wafwoof_data = WafWoof.get_wafw00f_scan_by_ip_address(host)
 
         if wafwoof_data.count() < 1:
-            return responses.http_response_200("No scan result exists for this IP address.")
+            return responses.http_response_404("No scan result exists for this IP address.")
 
         if wafwoof_data.count() > 0:
             return responses.http_response_200('Data successfully retrieved', wafwoof_data)
 
         return responses.http_response_500('An error occurred!')
+    
