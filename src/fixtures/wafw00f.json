@@ -1,0 +1,20 @@
+[
+{
+    "model": "wafw00f.wafwoof",
+    "pk": 1,
+    "fields": {
+        "host": 3,
+        "data": {
+            "data": [
+                {
+                    "url": "https://193.122.75.144",
+                    "detected": false,
+                    "firewall": "None",
+                    "manufacturer": "None"
+                }
+            ]
+        },
+        "date_created": "2022-10-11T11:37:18.979Z"
+    }
+}
+]
