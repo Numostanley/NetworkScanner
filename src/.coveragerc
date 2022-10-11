@@ -1,0 +1,13 @@
+[run]
+omit =
+    */node_modules/*
+    */__init__.py
+    manage.py
+    */venv/*
+    */tasks.py
+    */migrations/*
+    */core/*
+    */utils/*
+    */tools/*
+    */fixtures/*
+    */tests.py
