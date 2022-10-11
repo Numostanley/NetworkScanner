@@ -40,19 +40,21 @@ class WafWoofScanner(Scanner):
 
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
+        try:
+            self.cmd.run(f'sudo wafw00f {self.ip_address} -o ip_scans/{self.output_file} -f json',
+                        shell=True)
 
-        self.cmd.run(f'sudo wafw00f {self.ip_address} -o ip_scans/{self.output_file} -f json',
-                       shell=True)
-
-        # cd into ip_scans directory
-        self.server_os.chdir("ip_scans")
-        
-        # open the JSON file to ensure it was created.
-        with open(self.output_file, 'r') as f:
-            json_output = f.read()
+            # cd into ip_scans directory
+            self.server_os.chdir("ip_scans")
             
-            return json_output
-        
+            # open the JSON file to ensure it was created.
+            with open(self.output_file, 'r') as f:
+                json_output = f.read()
+                
+                return json_output
+        finally:
+            self.cmd.run(f'sudo rm -f {self.output_file}', shell=True)
+
     def response(self):
         """return response"""
         return json.loads(self.scan())
