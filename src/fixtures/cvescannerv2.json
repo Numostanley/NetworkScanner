@@ -1,0 +1,1009 @@
+[
+{
+    "model": "cvescannerv2.cvescannerv2",
+    "pk": 1,
+    "fields": {
+        "host": 1,
+        "cve_data": {
+            "cve_data": [
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "9.3",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2008-3844",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "4.3",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2007-2768",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: openssh",
+                    "cves": "cves: 2",
+                    "port": "22",
+                    "protocol": "tcp",
+                    "service-name": "ssh",
+                    "state": "open",
+                    "version": "version: 8.9"
+                },
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "9.8",
+                                "cveid": "CVE-2016-0746",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-0337",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-4547",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.2",
+                                "csvssv3": "7.8",
+                                "cveid": "CVE-2016-1247",
+                                "exploitdb": "Yes",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "6.8",
+                                "csvssv3": "7.7",
+                                "cveid": "CVE-2021-23017",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-2070",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "7.4",
+                                "cveid": "CVE-2021-3618",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "7.5",
+                                "cveid": "CVE-2016-0742",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2011-4963",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "5.3",
+                                "cveid": "CVE-2016-0747",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "80",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                },
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "9.8",
+                                "cveid": "CVE-2016-0746",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-0337",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-4547",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.2",
+                                "csvssv3": "7.8",
+                                "cveid": "CVE-2016-1247",
+                                "exploitdb": "Yes",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "6.8",
+                                "csvssv3": "7.7",
+                                "cveid": "CVE-2021-23017",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-2070",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "7.4",
+                                "cveid": "CVE-2021-3618",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "7.5",
+                                "cveid": "CVE-2016-0742",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2011-4963",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "5.3",
+                                "cveid": "CVE-2016-0747",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "8888",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                }
+            ]
+        },
+        "date_created": "2022-10-07T18:29:08.599Z"
+    }
+},
+{
+    "model": "cvescannerv2.cvescannerv2",
+    "pk": 2,
+    "fields": {
+        "host": 1,
+        "cve_data": {
+            "cve_data": [
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "9.3",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2008-3844",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "4.3",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2007-2768",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: openssh",
+                    "cves": "cves: 2",
+                    "port": "22",
+                    "protocol": "tcp",
+                    "service-name": "ssh",
+                    "state": "open",
+                    "version": "version: 8.9"
+                },
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-0337",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "9.8",
+                                "cveid": "CVE-2016-0746",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-4547",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.2",
+                                "csvssv3": "7.8",
+                                "cveid": "CVE-2016-1247",
+                                "exploitdb": "Yes",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "6.8",
+                                "csvssv3": "7.7",
+                                "cveid": "CVE-2021-23017",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "7.4",
+                                "cveid": "CVE-2021-3618",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-2070",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "7.5",
+                                "cveid": "CVE-2016-0742",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "5.3",
+                                "cveid": "CVE-2016-0747",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2011-4963",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "80",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                },
+                {
+                    "CVE_Data": {
+                        "cve_data": [
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-0337",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "9.8",
+                                "cveid": "CVE-2016-0746",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.5",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-4547",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "7.2",
+                                "csvssv3": "7.8",
+                                "cveid": "CVE-2016-1247",
+                                "exploitdb": "Yes",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "6.8",
+                                "csvssv3": "7.7",
+                                "cveid": "CVE-2021-23017",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "7.4",
+                                "cveid": "CVE-2021-3618",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.8",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2013-2070",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "7.5",
+                                "cveid": "CVE-2016-0742",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "5.3",
+                                "cveid": "CVE-2016-0747",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            },
+                            {
+                                "csvssv2": "5.0",
+                                "csvssv3": "-",
+                                "cveid": "CVE-2011-4963",
+                                "exploitdb": "No",
+                                "metasploit": "No"
+                            }
+                        ]
+                    },
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "8888",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                }
+            ]
+        },
+        "date_created": "2022-10-07T18:31:55.473Z"
+    }
+},
+{
+    "model": "cvescannerv2.cvescannerv2",
+    "pk": 3,
+    "fields": {
+        "host": 1,
+        "cve_data": {
+            "cve_data": [
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "9.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2008-3844",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "4.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2007-2768",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: openssh",
+                    "cves": "cves: 2",
+                    "port": "22",
+                    "protocol": "tcp",
+                    "service-name": "ssh",
+                    "state": "open",
+                    "version": "version: 8.9"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "80",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "8888",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                }
+            ]
+        },
+        "date_created": "2022-10-07T18:33:44.334Z"
+    }
+},
+{
+    "model": "cvescannerv2.cvescannerv2",
+    "pk": 4,
+    "fields": {
+        "host": 1,
+        "cve_data": {
+            "cve_data": [
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "9.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2008-3844",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "4.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2007-2768",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: openssh",
+                    "cves": "cves: 2",
+                    "port": "22",
+                    "protocol": "tcp",
+                    "service-name": "ssh",
+                    "state": "open",
+                    "version": "version: 8.9"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "80",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "8888",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                }
+            ]
+        },
+        "date_created": "2022-10-08T10:09:24.171Z"
+    }
+},
+{
+    "model": "cvescannerv2.cvescannerv2",
+    "pk": 5,
+    "fields": {
+        "host": 1,
+        "cve_data": {
+            "cve_data": [
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "9.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2008-3844",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "4.3",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2007-2768",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: openssh",
+                    "cves": "cves: 2",
+                    "port": "22",
+                    "protocol": "tcp",
+                    "service-name": "ssh",
+                    "state": "open",
+                    "version": "version: 8.9"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "80",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                },
+                {
+                    "CVE_Data": [
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-0337",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-4547",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.5",
+                            "csvssv3": "9.8",
+                            "cveid": "CVE-2016-0746",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "7.2",
+                            "csvssv3": "7.8",
+                            "cveid": "CVE-2016-1247",
+                            "exploitdb": "Yes",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "6.8",
+                            "csvssv3": "7.7",
+                            "cveid": "CVE-2021-23017",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "7.4",
+                            "cveid": "CVE-2021-3618",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.8",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2013-2070",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "7.5",
+                            "cveid": "CVE-2016-0742",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "5.3",
+                            "cveid": "CVE-2016-0747",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        },
+                        {
+                            "csvssv2": "5.0",
+                            "csvssv3": "-",
+                            "cveid": "CVE-2011-4963",
+                            "exploitdb": "No",
+                            "metasploit": "No"
+                        }
+                    ],
+                    "Product": "product: nginx",
+                    "cves": "cves: 11",
+                    "port": "8888",
+                    "protocol": "tcp",
+                    "service-name": "http",
+                    "state": "open",
+                    "version": "version: 1.19.0"
+                }
+            ]
+        },
+        "date_created": "2022-10-09T14:12:52.923Z"
+    }
+}
+]

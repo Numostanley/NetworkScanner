@@ -144,13 +144,6 @@ class CVEScanner(Scanner):
 
                 self.data.append(result)
 
-            end_time = nmap_results['nmaprun']['host']['@endtime']
-            start_time = nmap_results['nmaprun']['host']['@starttime']
-
-            scan_time = {"Scan time": f"{int(end_time) - int(start_time)} secs"}
-
-            self.data.append(scan_time)
-
         except KeyError as e:  # either host is down
             # or no open ports or CVEScan data
 
@@ -165,3 +158,4 @@ class CVEScanner(Scanner):
             return {"message": "host is either down or has no open ports or CVEScan data"}
 
         return self.data
+

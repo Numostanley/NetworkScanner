@@ -73,8 +73,10 @@ htmlcov/
 .cache
 .pytest_cache/
 nosetests.xml
-coverage.xml
+#coverage.xml
 *.cover
+codecov
+coverage-vulnscan.bash
 .hypothesis/
 
 # Jupyter Notebook
@@ -134,3 +136,6 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+# redis database
+dump.rdb

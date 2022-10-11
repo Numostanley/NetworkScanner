@@ -28,7 +28,14 @@ admin_urls = [
 
 # api urls
 api_urls = [
-    path('scanners/', include('apis.scanners.urls')),
+    path('scanners/', include(([
+        path('cvescanner/', include('apis.scanners.cvescannerv2.urls')),
+        path('dirby/', include('apis.scanners.dirby.urls')),
+        path('sslyze/', include('apis.scanners.sslyze.urls')),
+        path('wafwoof/', include('apis.scanners.wafw00f.urls')),
+        path('wapiti/', include('apis.scanners.wapiti.urls')),
+        path('whatweb/', include('apis.scanners.whatweb.urls')),
+    ]))),
 ]
 
 api_version_one = get_api_version(base.API_VERSIONS, 'v1')

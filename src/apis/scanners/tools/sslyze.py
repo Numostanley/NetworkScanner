@@ -141,4 +141,5 @@ class SslyzeScanner(Scanner):
         
         return self.data
     
-    
+
+   

@@ -17,3 +17,4 @@ from core.settings import get_settings_environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'{get_settings_environment()}')
 
 application = get_asgi_application()
+

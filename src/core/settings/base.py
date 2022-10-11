@@ -52,6 +52,9 @@ API_PREFIX = env_config['API_PREFIX']
 API_VERSIONS = env_config['API_VERSIONS']
 APPEND_SLASH = False
 
+# Fixtures data for testing
+FIXTURE_DIRS = [f'{BASE_DIR}/fixtures/']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,10 +64,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
-    'apis.scanners',
+    'apis.scanners.cvescannerv2',
+    'apis.scanners.dirby',
+    'apis.scanners.hosts',
+    'apis.scanners.sslyze',
+    'apis.scanners.wafw00f',
+    'apis.scanners.wapiti',
+    'apis.scanners.whatweb'
 ]
 
 MIDDLEWARE = [
