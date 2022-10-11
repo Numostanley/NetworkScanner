@@ -16,7 +16,7 @@ class WafWoof(models.Model):
         """create a wafw00f scan result"""
         return WafWoof.objects.create(
             host=host,
-            data=data
+            data={"data":data}
         )
 
     @staticmethod

@@ -11,7 +11,7 @@ class WafW00fTest(TestCase):
     fixtures = 'wafw00f.json'
 
     def setUp(self) -> None:
-        self.host = Host.create_host(ip_address='193.122.66.53')
+        self.host = Host.create_host(ip_address='193.122.75.144')
         self.none_host = Host.get_host('122.121.33.45')
         self.wafw00f_scan = WafWoof.get_wafw00f_scan_by_ip_address(host=self.host)
         self.create_wafw00f_scan = WafWoof.create_wafwoof_scan(self.host, json.loads(self.fixtures))
@@ -23,7 +23,7 @@ class WafW00fTest(TestCase):
         response_400 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=')
         self.assertEqual(response_400.status_code, 400)
 
-        response_200 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=193.122.67.133')
+        response_200 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=193.122.75.144')
         self.assertEqual(response_200.status_code, 200)
 
     def test_wafw00f_scan_result(self):

@@ -9,7 +9,7 @@ class WhatWebTest(TestCase):
     fixtures = []
 
     def setUp(self) -> None:
-        self.host = Host.create_host(ip_address='193.122.66.53')
+        self.host = Host.create_host(ip_address='193.122.75.144')
         self.none_host = Host.get_host('122.121.33.45')
         self.whatweb_scan = WhatWeb.get_whatweb_scan_by_ip_addr(host=self.host)
         self.create_whatweb_scan = WhatWeb.create_whatweb_scan(self.host, self.fixtures)
@@ -21,7 +21,7 @@ class WhatWebTest(TestCase):
         response_400 = self.client.get(f'{BASE_URL}/whatweb/scan?ip_address=')
         self.assertEqual(response_400.status_code, 400)
 
-        response_200 = self.client.get(f'{BASE_URL}/whatweb/scan?ip_address=193.122.67.133')
+        response_200 = self.client.get(f'{BASE_URL}/whatweb/scan?ip_address=193.122.75.144')
         self.assertEqual(response_200.status_code, 200)
 
     def test_whatweb_scan_result(self):
