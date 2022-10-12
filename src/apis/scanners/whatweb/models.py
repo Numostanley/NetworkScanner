@@ -15,7 +15,7 @@ class WhatWeb(models.Model):
         """create a whatweb scan result"""
         return WhatWeb.objects.create(
             host=host,
-            data=data[0]
+            data={"data":data[0]}
         )
 
     @staticmethod
