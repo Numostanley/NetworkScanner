@@ -8,21 +8,25 @@ from .models import WafWoof
 
 
 class WafW00fTest(TestCase):
-    fixtures = ['wafw00f.json']
+    found_ip_addr = '193.122.75.144'
+    not_found_ip_addr = '122.121.33.45'
 
     def setUp(self) -> None:
-        with open(self.fixtures[0], 'r') as f:
+        with open('fixtures/wafw00f.json', 'r') as f:
            data = json.load(f)
 
-        self.host = Host.create_host(ip_address='193.122.75.144')
-        self.none_host = Host.get_host('122.121.33.45')
-        self.create_wafw00f_scan = WafWoof.create_wafwoof_scan(self.host, data)
-        self.wafw00f_scan = WafWoof.get_wafw00f_scan_by_ip_address(host=self.host)
+        self.found_host = Host.create_host(ip_address=self.found_ip_addr)
+        self.not_found_host = Host.get_host(self.not_found_ip_addr)
+        self.create_wafw00f_scan = WafWoof.create_wafwoof_scan(self.found_host, data)
+        self.get_wafw00f_scan_result = WafWoof.get_wafw00f_scan_by_ip_address(host=self.found_host)
 
     def test_wafw00f_creation(self):
         self.assertIsInstance(self.create_wafw00f_scan, WafWoof)
 
     def test_wafw00f_scanner(self):
+        no_ip_address_key = self.client.get(f'{BASE_URL}/wafwoof/scan?')
+        self.assertEqual(no_ip_address_key.status_code, 400)
+
         response_400 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=')
         self.assertEqual(response_400.status_code, 400)
 
@@ -30,17 +34,28 @@ class WafW00fTest(TestCase):
         self.assertEqual(response_200.status_code, 200)
 
     def test_wafw00f_scan_result(self):
+        # test if ip_address key is in query parameters
+        no_ip_address_key = self.client.get(f'{BASE_URL}/wafwoof/scan?')
+        self.assertEqual(no_ip_address_key.status_code, 400)
+
+        # test if ip_address key has a value
         response_400 = self.client.get(f'{BASE_URL}/wafwoof/get-result?ip_address=')
         self.assertEqual(response_400.status_code, 400)
 
-        self.assertIsNone(self.none_host)
+        # test if the host is not found
+        self.assertIsNone(self.not_found_host)
 
-        found_host = Host.get_host(self.host.ip_address)
-        self.assertIsNotNone(found_host)
+        # test if the host is found
+        self.assertIsNotNone(self.found_host)
 
-        response = self.client.get(f'{BASE_URL}/wafwoof/get-result?ip_address={self.host.ip_address}')
+        not_found_host_response = self.client.get(
+            f'{BASE_URL}/wafwoof/get-result?ip_address={self.not_found_ip_addr}'
+        )
+        self.assertEqual(not_found_host_response.status_code, 404)
 
-        if self.wafw00f_scan.count() < 1:
+        response = self.client.get(f'{BASE_URL}/wafwoof/get-result?ip_address={self.found_host.ip_address}')
+
+        if self.get_wafw00f_scan_result.count() < 1:
             self.assertEqual(response.status_code, 404)
-        if self.wafw00f_scan.count() > 0:
+        if self.get_wafw00f_scan_result.count() > 0:
             self.assertEqual(response.status_code, 200)

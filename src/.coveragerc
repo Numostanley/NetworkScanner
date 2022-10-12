@@ -13,6 +13,7 @@ omit =
     */fixtures/*
     */tests.py
     */htmlcov/*
+    /usr/*
 
 [report]
 # Regexes for lines to exclude from consideration

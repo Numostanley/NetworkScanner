@@ -12,6 +12,9 @@ class WafWoofScannerAPIView(AuthProtectedAPIView):
         query_params = request.query_params
 
         # get ip_address from the url query parameters
+        if 'ip_address' not in query_params:
+            return responses.http_response_400('IP address key not found in Query Parameters!')
+
         ip_address = query_params.get('ip_address', '')
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
@@ -31,6 +34,9 @@ class WafW00fScanResultAPIView(AuthProtectedAPIView):
         query_params = request.query_params
 
         # get ip_address from the url query parameters
+        if 'ip_address' not in query_params:
+            return responses.http_response_400('IP address key not found in Query Parameters!')
+
         ip_address = query_params.get('ip_address', '')
         if not ip_address:
             return responses.http_response_400('IP address not specified!')
@@ -48,4 +54,3 @@ class WafW00fScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_200('Data successfully retrieved', wafwoof_data)
 
         return responses.http_response_500('An error occurred!')
-    
