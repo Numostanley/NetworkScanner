@@ -15,7 +15,7 @@ class DirbyTest(TestCase):
         self.create_dirby_scan = DirBy.create_dirby_scan(self.host, self.fixtures)
 
     def test_dirby_creation(self):
-        self.assertTrue(isinstance(self.create_dirby_scan, DirBy))
+        self.assertIsInstance(self.create_dirby_scan, DirBy)
 
     def test_dirby_scanner(self):
         response_400 = self.client.get(f'{BASE_URL}/dirby/scan?ip_address=')

@@ -8,19 +8,19 @@ from .models import WafWoof
 
 
 class WafW00fTest(TestCase):
-    # fixtures = 'wafw00f.json'
+    fixtures = ['wafw00f.json']
 
     def setUp(self) -> None:
+        with open(self.fixtures[0], 'r') as f:
+           data = json.load(f)
+
         self.host = Host.create_host(ip_address='193.122.75.144')
         self.none_host = Host.get_host('122.121.33.45')
-        with open('fixtures/sslyze.json', 'r') as f:
-           json_data = f.read()
-           data = json.loads(json_data)
         self.create_wafw00f_scan = WafWoof.create_wafwoof_scan(self.host, data)
         self.wafw00f_scan = WafWoof.get_wafw00f_scan_by_ip_address(host=self.host)
 
     def test_wafw00f_creation(self):
-        self.assertTrue(isinstance(self.create_wafw00f_scan, WafWoof))
+        self.assertIsInstance(self.create_wafw00f_scan, WafWoof)
 
     def test_wafw00f_scanner(self):
         response_400 = self.client.get(f'{BASE_URL}/wafwoof/scan?ip_address=')

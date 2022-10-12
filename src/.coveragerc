@@ -1,3 +1,4 @@
+# .coveragerc to control coverage.py
 [run]
 omit =
     */node_modules/*
@@ -7,7 +8,17 @@ omit =
     */tasks.py
     */migrations/*
     */core/*
-    */utils/*
+    */apis/utils/*
     */tools/*
     */fixtures/*
     */tests.py
+    */htmlcov/*
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
+    @abstract
+    except Exception as e:
+
+show_missing = True
