@@ -13,7 +13,7 @@ class SslyzeTest(TestCase):
         self.host = Host.create_host(ip_address='193.122.67.133')
         self.none_host = Host.get_host('122.121.33.45')
         with open('fixtures/sslyze.json', 'r') as f:
-           data = json.loads(f)
+           data = json.load(f)
            
         for datum in data:
             SSLyze.create_sslyze_scan(host=self.host, data=datum['fields'])
