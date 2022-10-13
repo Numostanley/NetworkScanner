@@ -14,8 +14,8 @@ class CVEScannerTest(TestCase):
         self.host = Host.create_host(ip_address='193.122.66.53')
         self.none_host = Host.get_host('122.121.33.45')
         with open('fixtures/cvescannerv2.json', 'r') as f:
-           json_data = f.read()
-           data = json.loads(json_data)
+           data = json.loads(f)
+           
         for datum in data:
             CVEScannerV2.create_cvescanner_scan(host=self.host, data=datum['fields']['cve_data']['cve_data'])  
         self.cve_scan = CVEScannerV2.get_cvescanner_by_host(host=self.host)
