@@ -13,8 +13,8 @@ class SslyzeTest(TestCase):
         self.host = Host.create_host(ip_address='193.122.67.133')
         self.none_host = Host.get_host('122.121.33.45')
         with open('fixtures/sslyze.json', 'r') as f:
-           json_data = f.read()
-           data = json.loads(json_data)
+           data = json.load(f)
+           
         for datum in data:
             SSLyze.create_sslyze_scan(host=self.host, data=datum['fields'])
         self.sslyze_scan = SSLyze.get_sslyze_scan_by_ip_address(host=self.host)
@@ -40,9 +40,11 @@ class SslyzeTest(TestCase):
         if self.sslyze_scan.count() > 0:
             self.assertEqual(response.status_code, 200)
         
+        query_params = response.request['QUERY_STRING']
+        check = 'ip_address' in query_params
         response_400 = self.client.get(f'{BASE_URL}/sslyze/get-result?ip_address=')
         self.assertEqual(response_400.status_code, 400)
-    
+        self.assertEqual(check, True)
         
     def test_model_field_type(self):
         sslyze = SSLyze.objects.get(id=1)
