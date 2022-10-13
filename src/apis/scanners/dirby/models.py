@@ -20,7 +20,15 @@ class DirBy(models.Model):
         )
 
     @staticmethod
-    def get_dirby_scan_by_ip_address(host: Host):
+    def get_dirby_scan_by_id(id):
+        """retrieve dirby scan by id"""
+        try:
+            return DirBy.objects.get(id=id)
+        except DirBy.DoesNotExist:
+            return None
+
+    @staticmethod
+    def get_dirby_scan_by_host(host: Host):
         """retrieve dirby scans in reverse chronological order"""
         return DirBy.objects.filter(host=host).values().order_by('-date_created')
 

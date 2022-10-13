@@ -139,6 +139,3 @@ GitHub.sublime-settings
 
 # redis database
 dump.rdb
-
-# coverage html files
-htmlcov

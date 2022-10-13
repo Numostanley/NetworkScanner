@@ -24,7 +24,15 @@ class Wapiti(models.Model):
         )
 
     @staticmethod
-    def get_wapiti_scan_by_ip_address(host: Host):
+    def get_wapiti_scan_by_id(id):
+        """retrieve wapiti scan by id"""
+        try:
+            return Wapiti.objects.get(id=id)
+        except Wapiti.DoesNotExist:
+            return None
+
+    @staticmethod
+    def get_wapiti_scan_by_host(host: Host):
         """retrieve wapiti scans in reverse chronological order"""
         return Wapiti.objects.filter(host=host).values().order_by('-date_created')
 

@@ -19,7 +19,7 @@ class WafW00fTest(TestCase):
         self.not_found_host = Host.get_host(self.not_found_ip_addr)
         for datum in data:
             WafWoof.create_wafwoof_scan(self.found_host, datum)
-        self.get_wafw00f_scan_result = WafWoof.get_wafw00f_scan_by_ip_address(host=self.found_host)
+        self.get_wafw00f_scan_result = WafWoof.get_wafw00f_scan_by_host(self.found_host)
 
     # def test_wafw00f_creation(self):
     #     self.assertIsInstance(self.create_wafw00f_scan, WafWoof)

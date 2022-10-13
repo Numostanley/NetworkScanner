@@ -36,7 +36,15 @@ class SSLyze(models.Model):
         )
 
     @staticmethod
-    def get_sslyze_scan_by_ip_address(host: Host):
+    def get_sslyze_scan_by_id(id):
+        """retrieve sslyze scan by id"""
+        try:
+            return SSLyze.objects.get(id=id)
+        except SSLyze.DoesNotExist:
+            return None
+
+    @staticmethod
+    def get_sslyze_scan_by_host(host: Host):
         """retrieve sslyze scans in reverse chronological order"""
         return SSLyze.objects.filter(host=host).values().order_by('-date_created')
 
