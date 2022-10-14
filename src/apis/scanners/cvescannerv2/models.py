@@ -14,8 +14,7 @@ class CVEScannerV2(models.Model):
     @staticmethod
     def create_cvescanner_scan(host: Host, data: list):
         """create a cvescannerv2 scan result"""
-
-        CVEScannerV2.objects.create(
+        return CVEScannerV2.objects.create(
             host=host,
             cve_data={"cve_data": data}
         )

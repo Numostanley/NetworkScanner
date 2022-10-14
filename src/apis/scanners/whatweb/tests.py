@@ -5,6 +5,7 @@ from apis.scanners.hosts.models import Host
 from .models import WhatWeb
 import json
 
+
 class WhatWebTest(TestCase):
     # fixtures = []
 
