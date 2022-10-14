@@ -54,6 +54,6 @@ class SSLyzeScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_404("No scan result exists for this IP address.")
 
         if sslyze_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved',sslyze_data)
+            return responses.http_response_200('Data successfully retrieved', sslyze_data)
 
         return responses.http_response_500('An error occurred!')
