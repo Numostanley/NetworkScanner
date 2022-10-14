@@ -24,10 +24,9 @@ def wafwoof_task(ip_address: str):
     except Host.DoesNotExist:
         # if host ip address does not exist, create new host
         host = Host.create_host(ip_address)
-        
-    if len(data) > 0:
-        # create wafw00f scan
-        WafWoof.create_wafwoof_scan(host, data)
+  
+    # create wafw00f scan
+    WafWoof.create_wafwoof_scan(host, data)
 
     # return the data
     return data

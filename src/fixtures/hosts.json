@@ -1,0 +1,29 @@
+[
+{
+    "model": "hosts.host",
+    "pk": 1,
+    "fields": {
+        "ip_address": "193.122.66.53",
+        "host_name": "",
+        "date_created": "2022-10-10T20:19:34.079Z"
+    }
+},
+{
+    "model": "hosts.host",
+    "pk": 2,
+    "fields": {
+        "ip_address": "193.122.67.133",
+        "host_name": "",
+        "date_created": "2022-10-10T20:28:16.202Z"
+    }
+},
+{
+    "model": "hosts.host",
+    "pk": 3,
+    "fields": {
+        "ip_address": "193.122.75.144",
+        "host_name": "",
+        "date_created": "2022-10-11T10:43:24.209Z"
+    }
+}
+]

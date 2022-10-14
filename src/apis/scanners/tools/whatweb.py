@@ -24,7 +24,7 @@ class WhatWebScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run('sudo mkdir ip_scans',
                          capture_output=True,
                          shell=True,
                          check=True)
@@ -41,17 +41,19 @@ class WhatWebScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
 
+        # try:
+        self.cmd.run(f'sudo ./whatweb {self.ip_address} '
+                        f'--log-json=ip_scans/{self.output_file}',
+                        shell=True)
+        
         try:
-            self.cmd.run(f'./whatweb {self.ip_address} '
-                           f'--log-json=ip_scans/{self.output_file}',
-                           shell=True)
             return self.cmd.run(f'cat ip_scans/{self.output_file}',
-                                  shell=True,
-                                  text=True,
-                                  capture_output=True).stdout
+                                shell=True,
+                                text=True,
+                                capture_output=True).stdout
         finally:
-            self.cmd.run(f'sudo rm ip_scans/{self.output_file}', shell=True)
-
+            self.cmd.run(f'sudo rm -r ip_scans/{self.output_file}', shell=True)
+              
     def response(self):
         """return response"""
         return json.loads(self.scan())

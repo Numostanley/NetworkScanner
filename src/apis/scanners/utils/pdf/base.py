@@ -67,7 +67,7 @@ class PDFGenerator(AbstractBasePDFGenerator):
         self.tool_static_file = tool_static_file.lower()
 
     def get_app_dir(self) -> Path:
-        """retrieve application directory i.e (scanners app)"""
+        """retrieve application directory i.e (`scanners` directory)"""
         app_dir = Path(__file__).resolve().parent.parent.parent
         return app_dir
 
@@ -106,18 +106,19 @@ class PDFGenerator(AbstractBasePDFGenerator):
         return html
 
     def generate_pdf(self):
-        """generate pdf using the IP address as the name and return pdf file path"""
-
-        # get the root directory
-        root_dir = self.get_app_dir().parent.parent
+        """generate pdf using the IP address as the name"""
         html = self.stringify_context()
 
         # generate pdf
-        html.write_pdf(
+        return html.write_pdf(
             f'file_downloads/scanners/{self.tool}/scan_report_on_{self.ip_address}.pdf',
             stylesheets=[self.locate_static()]
         )
 
+    def return_pdf_file_path(self):
+        """return the generated pdf file path"""
+        # get the root directory
+        root_dir = self.get_app_dir().parent.parent
         # create file_downloads/scan_report_statement/{self.tool}
         # folder in the project root directory if it does not exist
         Path(f'file_downloads/scanners/{self.tool}').mkdir(exist_ok=True, parents=True)
@@ -129,4 +130,5 @@ class PDFGenerator(AbstractBasePDFGenerator):
 
     def delete_pdf(self):
         """delete pdf file after download."""
-        Path(self.generate_pdf()).unlink(missing_ok=True)
+        Path(self.return_pdf_file_path()).unlink(missing_ok=True)
+        return True

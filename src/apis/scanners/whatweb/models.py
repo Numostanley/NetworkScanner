@@ -15,11 +15,19 @@ class WhatWeb(models.Model):
         """create a whatweb scan result"""
         return WhatWeb.objects.create(
             host=host,
-            data=data[0]
+            data={"data": data}
         )
 
     @staticmethod
-    def get_whatweb_scan_by_ip_addr(host: Host):
+    def get_whatweb_scan_by_id(id):
+        """retrieve whatweb scan by id"""
+        try:
+            return WhatWeb.objects.get(id=id)
+        except WhatWeb.DoesNotExist:
+            return None
+
+    @staticmethod
+    def get_whatweb_scan_by_host(host: Host):
         """retrieve whatweb scans in reverse chronological order"""
         return WhatWeb.objects.filter(host=host).values().order_by('-date_created')
 
