@@ -107,5 +107,9 @@ class SSLyzeModelTest(TestCase):
         sslyze_scan = SSLyze.get_sslyze_scan_by_host(self.host)
         self.assertIsInstance(sslyze_scan, QuerySet)
 
+    def test_get_sslyze_by_id_does_not_exist(self):
+        sslyxe_scan = SSLyze.get_sslyze_scan_by_id(20)
+        self.assertIsNone(sslyxe_scan)
+
     def test_sslyze_str(self):
         self.assertEqual(self.sslyze.__str__(), self.sslyze.host.ip_address)

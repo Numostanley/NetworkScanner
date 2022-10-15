@@ -48,7 +48,7 @@ class WapitiScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        wapiti_data = Wapiti.get_wapiti_scan_by_host(host=host)
+        wapiti_data = Wapiti.get_wapiti_scan_by_host(host)
         
         if wapiti_data.count() < 1:
             return responses.http_response_404("No scan result exists for this host.")

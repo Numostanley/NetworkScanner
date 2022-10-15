@@ -42,5 +42,9 @@ class DirByModelTest(TestCase):
         dirby_scan = DirBy.get_dirby_scan_by_host(self.host)
         self.assertIsInstance(dirby_scan, QuerySet)
 
+    def test_get_dirby_by_id_does_not_exist(self):
+        dirby_scan = DirBy.get_dirby_scan_by_id(20)
+        self.assertIsNone(dirby_scan)
+
     def test_dirby_str(self):
         self.assertEqual(self.dirby.__str__(), self.dirby.host.ip_address)

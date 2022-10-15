@@ -16,7 +16,7 @@ class SslyzeScannerTest(TestCase):
         response = self.client.get(f'{BASE_URL}/sslyze/scan?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/sslyze/scan?host=')
         self.assertEqual(response.status_code, 400)
 
@@ -50,7 +50,7 @@ class SslyzeScanResultTest(TestCase):
         response = self.client.get(f'{BASE_URL}/sslyze/get-result?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/sslyze/get-result?host=')
         self.assertEqual(response.status_code, 400)
 
