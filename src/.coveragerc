@@ -12,16 +12,20 @@ omit =
     */tools/*
     */fixtures/*
     */tests.py
+    */test_models.py
+    */test_views.py
     */htmlcov/*
     /usr/*
-    */apis/scanners/dirby/*
-    */apis/scanners/whatweb/*
 
 [report]
 # Regexes for lines to exclude from consideration
 exclude_lines =
     pragma: no cover
     @abstract
+
+    # Don't complain if tests don't hit defensive exceptions
     except Exception as e:
+
+    send_pdf_report.delay
 
 show_missing = True

@@ -48,5 +48,9 @@ class WhatWebModelTest(TestCase):
         whatweb_scan = WhatWeb.get_whatweb_scan_by_host(self.host)
         self.assertIsInstance(whatweb_scan, QuerySet)
 
+    def test_get_whatweb_by_id_does_not_exist(self):
+        whatweb_scan = WhatWeb.get_whatweb_scan_by_id(20)
+        self.assertIsNone(whatweb_scan)
+
     def test_whatweb_str(self):
         self.assertEqual(self.whatweb.__str__(), self.whatweb.host.ip_address)

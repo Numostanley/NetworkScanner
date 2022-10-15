@@ -16,7 +16,7 @@ class WhatWebScannerTest(TestCase):
         response = self.client.get(f'{BASE_URL}/whatweb/scan?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/whatweb/scan?host=')
         self.assertEqual(response.status_code, 400)
 
@@ -52,7 +52,7 @@ class WhatWebScanResultTest(TestCase):
         response = self.client.get(f'{BASE_URL}/whatweb/get-result?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/whatweb/get-result?host=')
         self.assertEqual(response.status_code, 400)
 

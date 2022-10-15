@@ -63,5 +63,9 @@ class WhatWebModelTest(TestCase):
         wapiti_scan = Wapiti.get_wapiti_scan_by_host(self.host)
         self.assertIsInstance(wapiti_scan, QuerySet)
 
+    def test_get_wapiti_by_id_does_not_exist(self):
+        wapiti_scan = Wapiti.get_wapiti_scan_by_id(20)
+        self.assertIsNone(wapiti_scan)
+
     def test_wapiti_str(self):
         self.assertEqual(self.wapiti.__str__(), self.wapiti.host.ip_address)

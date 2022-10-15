@@ -51,7 +51,7 @@ class DirByScanResultAPIView(AuthProtectedAPIView):
         dirby_data = DirBy.get_dirby_scan_by_host(host)
 
         if dirby_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this IP address.")
+            return responses.http_response_404("No scan result exists for this host.")
 
         if dirby_data.count() > 0:
             return responses.http_response_200('Data successfully retrieved', dirby_data)

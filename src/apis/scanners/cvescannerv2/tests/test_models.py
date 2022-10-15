@@ -48,5 +48,9 @@ class CVEScannerV2ModelTest(TestCase):
         cvescannerv2_scan = CVEScannerV2.get_cvescannerv2_by_host(self.host)
         self.assertIsInstance(cvescannerv2_scan, QuerySet)
 
+    def test_get_cvescannerv2_by_id_does_not_exist(self):
+        cvescannerv2_scan = CVEScannerV2.get_cvescannerv2_scan_by_id(20)
+        self.assertIsNone(cvescannerv2_scan)
+
     def test_cvescannerv2_str(self):
         self.assertEqual(self.cvescannerv2.__str__(), self.cvescannerv2.host.ip_address)

@@ -48,10 +48,10 @@ class SSLyzeScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        sslyze_data = SSLyze.get_sslyze_scan_by_host(host=host)
+        sslyze_data = SSLyze.get_sslyze_scan_by_host(host)
         
         if sslyze_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this IP address.")
+            return responses.http_response_404("No scan result exists for this host.")
 
         if sslyze_data.count() > 0:
             return responses.http_response_200('Data successfully retrieved', sslyze_data)

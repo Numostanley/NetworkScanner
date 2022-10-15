@@ -16,7 +16,7 @@ class WapitiScannerTest(TestCase):
         response = self.client.get(f'{BASE_URL}/wapiti/scan?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/wapiti/scan?host=')
         self.assertEqual(response.status_code, 400)
 
@@ -57,7 +57,7 @@ class WapitiScanResultTest(TestCase):
         response = self.client.get(f'{BASE_URL}/wapiti/get-result?')
         self.assertEqual(response.status_code, 400)
 
-    def test_host_value_not_specified_in_query_params(self):
+    def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/wapiti/get-result?host=')
         self.assertEqual(response.status_code, 400)
 
