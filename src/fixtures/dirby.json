@@ -1,0 +1,17 @@
+[
+{
+    "model": "dirby.dirby",
+    "pk": 1,
+    "fields": {
+        "host": 3,
+        "data": {
+            "base_url": "https://193.122.75.144:443/",
+            "host": "193.122.75.144",
+            "port": 443,
+            "report": [],
+            "scheme": "https"
+        },
+        "date_created": "2022-10-17T12:52:18.175Z"
+    }
+}
+]
