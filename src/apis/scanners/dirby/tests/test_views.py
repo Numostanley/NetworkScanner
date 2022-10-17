@@ -7,8 +7,6 @@ from apis.scanners.hosts.models import Host
 from apis.scanners.dirby.models import DirBy
 
 
-
-
 class DirbyScannerTest(TestCase):
 
     def setUp(self) -> None:

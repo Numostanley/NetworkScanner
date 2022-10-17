@@ -25,11 +25,8 @@ def dirby_task(ip_address: str):
         # if host ip address does not exist, create new host
         host = Host.create_host(ip_address)
 
-    # deserialize data from json to python objects
-    cleaned_data = json.loads(data)
-
     # create dirby scan
-    DirBy.create_dirby_scan(host, cleaned_data)
+    DirBy.create_dirby_scan(host, data)
 
     # return the cleaned data
-    return cleaned_data
+    return data
