@@ -136,6 +136,12 @@ class SslyzeScanner(Scanner):
             logger.error("Key Error")
             logger.error(e)
             return {"Response": f"Scan result does not contain {e}"}
+        
+        finally:
+            subprocess.run(f'sudo rm -f {self.output_file}',
+                        capture_output=True,
+                        shell=True,
+                        check=True)
             
         self.data.append(result)
         
