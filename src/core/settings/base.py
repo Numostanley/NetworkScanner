@@ -74,7 +74,8 @@ INSTALLED_APPS = [
     'apis.scanners.sslyze',
     'apis.scanners.wafw00f',
     'apis.scanners.wapiti',
-    'apis.scanners.whatweb'
+    'apis.scanners.whatweb',
+    'apis.scanners.scanvus'
 ]
 
 MIDDLEWARE = [
