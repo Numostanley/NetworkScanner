@@ -46,12 +46,13 @@ class ScanvusScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
         
-        self.cmd.run(f'sudo python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
+        if self.password:
+            self.cmd.run(f'sudo python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
                                  f'--user-name {self.username} --password {self.password} '
                                  f'--save-vuln-report-json-path ip_scans/{self.output_file}',
                                  shell=True)
         
-         # cd into ip_scans directory
+        # cd into ip_scans directory
         self.server_os.chdir("ip_scans")
         
         # open the JSON file to ensure it was created.
