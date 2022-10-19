@@ -1,5 +1,3 @@
-import json
-
 from django.test import TestCase
 
 from apis.scanners.base.tests import BASE_URL

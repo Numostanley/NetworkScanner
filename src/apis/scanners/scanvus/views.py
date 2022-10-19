@@ -75,5 +75,3 @@ class ScanvusScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_200('Data successfully retrieved', scanvus_data)
 
         return responses.http_response_500('An error occurred!')
-    
-    

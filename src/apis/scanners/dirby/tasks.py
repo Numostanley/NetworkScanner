@@ -2,8 +2,6 @@
 register dirby's task for celery to autodiscover
 """
 
-import json
-
 from celery import shared_task
 from django.db import transaction
 
