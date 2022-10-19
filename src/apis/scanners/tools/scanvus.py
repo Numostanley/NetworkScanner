@@ -58,13 +58,10 @@ class ScanvusScanner(Scanner):
         with open(self.output_file, 'r') as f:
             json_output = f.read()
             
-            # parse the generated JSON file
-            scanvus_result = json.loads(json_output)
-
-            return scanvus_result
+            return json_output
    
     def response(self):
-        """return python object as response"""
-        return json.load(self.scan())
+        """return json object as response"""
+        return json.loads(self.scan())
     
         
