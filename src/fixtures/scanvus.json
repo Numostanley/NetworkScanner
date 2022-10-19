@@ -1,0 +1,11 @@
+[
+{
+    "model": "scanvus.scanvus",
+    "pk": 1,
+    "fields": {
+        "host": 4,
+        "data": {},
+        "date_created": "2022-10-19T11:32:28.791Z"
+    }
+}
+]
