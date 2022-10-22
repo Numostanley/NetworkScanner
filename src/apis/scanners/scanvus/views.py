@@ -4,6 +4,7 @@ from apis.scanners.hosts.models import Host
 from apis.utils.views import AuthProtectedAPIView
 from .models import Scanvus
 from .tasks import scanvus_task
+from apis.scanners.tools.base import get_server_user
 
 # Create your views here.
 
@@ -19,28 +20,45 @@ class ScanvusScannerAPIView(AuthProtectedAPIView):
         # get username key from the url query parameters
         if 'username' not in query_params:
             return responses.http_response_400('Username key not found in query parameters!')
-        
-        # get password key from the url query parameters
-        if 'password' not in query_params:
-            return responses.http_response_400('Password key not found in query parameters!')
+      
+        # get password and key_file key from the request
+        if 'key_file' not in request.FILES.keys() and 'password' not in query_params:
+            return responses.http_response_400('key_file or password not found in query parameters!')
 
         # get host, username and password values from the url query parameters
         host = query_params.get('host', '')
         username = query_params.get('username', '')
         password = query_params.get('password', '')
         
+        if 'key_file' in request.FILES.keys():
+            key = request.FILES['key_file'].name
+            
+            if not key:
+                return responses.http_response_400('Key_file not specified!')
+            
+            file_name, extension = key.split('.')
+            
+            if extension != 'pem' and extension != 'key':
+                return responses.http_response_400('key file not a valid format')
+
+            with open(f'/home/{get_server_user()}/tools/keys/{request.FILES["key_file"]}', 'wb') as f:
+                f.write(request.FILES["key_file"].read())
+           
         if not host:
             return responses.http_response_400('Host not specified!')
         
         if not username:
             return responses.http_response_400('Username not specified!')
         
-        if not password:
+        if 'password' in query_params and not password:
             return responses.http_response_400('Password not specified!')
 
         try:
             # scan ip address with credentials as background task
-            scanvus_task.delay(host, username, password)
+            if password:
+                scanvus_task.delay(host, username, password, "")
+            else:
+                scanvus_task.delay(host, username, "", key)
             return responses.http_response_200('Scan in progress')
         except Exception as e:
             error_logs.logger.error('ScanvusScannerAPIView.get@Error')
