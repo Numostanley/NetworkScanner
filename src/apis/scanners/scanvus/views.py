@@ -38,9 +38,11 @@ class ScanvusScannerAPIView(AuthProtectedAPIView):
             
             file_name, extension = key.split('.')
             
+            # check for valid file extension
             if extension != 'pem' and extension != 'key':
                 return responses.http_response_400('key file not a valid format')
 
+            # save key_file to a file path
             with open(f'/home/{get_server_user()}/tools/keys/{request.FILES["key_file"]}', 'wb') as f:
                 f.write(request.FILES["key_file"].read())
            
@@ -57,7 +59,7 @@ class ScanvusScannerAPIView(AuthProtectedAPIView):
             # scan ip address with credentials as background task
             if password:
                 scanvus_task.delay(host, username, password, "")
-            else:
+            elif key:
                 scanvus_task.delay(host, username, "", key)
             return responses.http_response_200('Scan in progress')
         except Exception as e:
