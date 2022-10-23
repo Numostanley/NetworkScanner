@@ -1,5 +1,5 @@
 """
-script to run the wapiti scan on the ip addresses
+script to run the wapiti scan on the host
 """
 
 import json

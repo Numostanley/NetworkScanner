@@ -1,5 +1,5 @@
 """
-script to run the CVEScannerV2 scan on the ip addresses
+script to run the CVEScannerV2 scan on the host
 """
 
 import json

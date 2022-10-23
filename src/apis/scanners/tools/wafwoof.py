@@ -1,5 +1,5 @@
 """
-script to run the wafw00f scan on the ip addresses
+script to run the wafw00f scan on the host
 """
 
 import json
