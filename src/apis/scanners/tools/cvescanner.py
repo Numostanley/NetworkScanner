@@ -157,6 +157,19 @@ class CVEScanner(Scanner):
             logger.error(e)
             return {"message": "host is either down or has no open ports or CVEScan data"}
         
+        except TypeError as e: # either host is down
+            # or no open ports or CVEScan data
+
+            # delete the created file if an error occurred.
+            subprocess.run(f'rm -f {self.output_file}',
+                        capture_output=True,
+                        shell=True,
+                        check=True)
+
+            logger.error("CVEScanner.get_host_port_list@Error")
+            logger.error(e)
+            return {"message": "host is either down or has no open ports or CVEScan data"}
+        
         finally:
             subprocess.run(f'sudo rm -f {self.output_file}',
                         capture_output=True,
@@ -164,4 +177,3 @@ class CVEScanner(Scanner):
                         check=True)
             
         return self.data
-
