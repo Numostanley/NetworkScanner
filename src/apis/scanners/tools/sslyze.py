@@ -1,5 +1,5 @@
 """
-script to run the SSLYZE scan on the ip addresses
+script to run the SSLYZE scan on the host
 """
 
 import json

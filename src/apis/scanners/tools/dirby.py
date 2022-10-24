@@ -1,5 +1,5 @@
 """
-script to run the dirb scan on the ip addresses
+script to run the dirby scan on the host
 """
 
 import json
@@ -26,7 +26,7 @@ class DirByScanner(Scanner):
         # change directory
         self.change_directory()
 
-        # execute test_dirby.py
+        # execute dirby.py
         self.cmd.run(f'python3 dirby.py --scheme https --host {self.host} --port 443 '
                      '--wordlist ./wordlists/common.txt',
                      shell=True)

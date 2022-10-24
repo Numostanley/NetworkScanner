@@ -1,2 +1,7 @@
 -r base.txt
 coverage==6.5.0
+ghp-import==2.1.0
+mkdocs==1.4.0
+PyYAML==6.0
+pyyaml_env_tag==0.1
+watchdog==2.1.9

@@ -1,11 +1,10 @@
 """
-script to run the SCANVUS scan on the ip addresses
+script to run the SCANVUS scan on the host
 """
 
 import json
 import subprocess
 
-from apis.utils.error_logs import logger
 from .base import Scanner, get_server_user
 
 
@@ -79,5 +78,3 @@ class ScanvusScanner(Scanner):
     def response(self):
         """return json object as response"""
         return json.loads(self.scan())
-    
-        

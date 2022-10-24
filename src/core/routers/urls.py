@@ -36,6 +36,7 @@ api_urls = [
         path('wapiti/', include('apis.scanners.wapiti.urls')),
         path('whatweb/', include('apis.scanners.whatweb.urls')),
         path('scanvus/', include('apis.scanners.scanvus.urls')),
+        path('screenshot/', include('apis.scanners.screenshot.urls', namespace='screenshot'))
     ]))),
 ]
 
