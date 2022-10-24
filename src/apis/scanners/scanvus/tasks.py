@@ -12,8 +12,9 @@ from .models import Scanvus
 
 @shared_task
 @transaction.atomic
-def scanvus_task(ip_address: str, username: str, password: str):
-    task = scanvus.ScanvusScanner(ip_address, username, password)
+def scanvus_task(ip_address: str, username: str, password: str, key: str):
+    
+    task = scanvus.ScanvusScanner(ip_address, username, password, key)
     data = task.response()
 
     try:
