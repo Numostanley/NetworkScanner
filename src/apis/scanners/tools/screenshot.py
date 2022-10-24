@@ -5,7 +5,7 @@ script to run the screenshot scan on the host
 import subprocess
 
 from apis.utils.error_logs import logger
-from apis.scanners.utils.extras import s3_filesystem_move
+from apis.scanners.utils.extras import s3_filesystem_move, sanitize_host
 from .base import Scanner, get_server_user
 
 
@@ -14,8 +14,8 @@ class ScreenShotScanner(Scanner):
     def __init__(self, ip_address: str, tool='BigBrowser'):
         super(ScreenShotScanner, self).__init__(ip_address, tool)
         self.host = ip_address
-        self.xml_output_file = f'{self.sanitize_host(self.host)}.xml'
-        self.zip_output_file = f'{self.sanitize_host(self.host)}.zip'
+        self.xml_output_file = f'{sanitize_host(self.host)}.xml'
+        self.zip_output_file = f'{sanitize_host(self.host)}.zip'
         self.tool = tool
 
     def change_directory(self):
@@ -61,15 +61,3 @@ class ScreenShotScanner(Scanner):
     def response(self):
         """return response"""
         return self.scan()
-
-    def sanitize_host(self, host: str):
-        """remove ., :, /, // if exist in host"""
-        if '.' in self.host:
-            self.host = ''.join(host.split('.'))
-        if ':' in host:
-            self.host = ''.join(host.split(':'))
-        if '/' in host:
-            self.host = ''.join(host.split('/'))
-        if '//' in host:
-            self.host = ''.join(host.split('//'))
-        return self.host
