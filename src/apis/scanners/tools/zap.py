@@ -17,7 +17,7 @@ class ZapScanner(Scanner):
         super(ZapScanner, self).__init__(ip_address, tool)
         self.api_key = api_key
         self.host = ip_address
-        self.output_file = f'{ip_address}.json'
+        self.output_file = ip_address
 
     def change_directory(self):
         """change directory to locate the `scripts` path i.e VulnScan directory"""
@@ -50,11 +50,11 @@ class ZapScanner(Scanner):
         self.mkdir_ip_scans_dir()
 
         self.cmd.run(f'python3 ./zap_api_script.py '
-                     f'{self.api_key} {self.host} --json_output=ip_scans/{sanitize_host(self.output_file)}')
+                     f'{self.api_key} {self.host} --json_output=ip_scans/{sanitize_host(self.output_file)}', shell=True)
         try:
-            return open(self.output_file, 'r')
+            return open(f'ip_scans/{sanitize_host(self.output_file)}.json', 'r')
         finally:
-            self.cmd.run(f'sudo rm -r ip_scans/{sanitize_host(self.output_file)}')
+            self.cmd.run(f'sudo rm -r ip_scans/{sanitize_host(self.output_file)}.json', shell=True)
 
     def response(self):
         """return response"""
