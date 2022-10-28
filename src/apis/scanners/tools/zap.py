@@ -49,7 +49,7 @@ class ZapScanner(Scanner):
 
         self.mkdir_ip_scans_dir()
 
-        self.cmd.run(f'python3 ./zap_example_api_script.py '
+        self.cmd.run(f'python3 ./zap_api_script.py '
                      f'{self.api_key} {self.host} --json_output=ip_scans/{sanitize_host(self.output_file)}')
         try:
             return open(self.output_file, 'r')
