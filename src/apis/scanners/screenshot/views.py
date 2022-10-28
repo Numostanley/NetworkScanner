@@ -34,22 +34,22 @@ class ScreenShotScannerAPIView(AuthProtectedAPIView):
 class ScreenShotScanResultAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
+        query_params = request.query_params
+
+        # get host key from the url query parameters
+        if 'host' not in query_params:
+            return responses.http_response_400('Host key not found in query parameters!')
+
+        # get host value from the url query parameters
+        host_key = query_params.get('host', '')
+        if not host_key:
+            return responses.http_response_400('Host not specified!')
+
+        host = Host.get_host(host_key)
+        if not host:
+            return responses.http_response_404('Host not found!')
+
         try:
-            query_params = request.query_params
-
-            # get host key from the url query parameters
-            if 'host' not in query_params:
-                return responses.http_response_400('Host key not found in query parameters!')
-
-            # get host value from the url query parameters
-            host_key = query_params.get('host', '')
-            if not host_key:
-                return responses.http_response_400('Host not specified!')
-
-            host = Host.get_host(host_key)
-            if not host:
-                return responses.http_response_404('Host not found!')
-
             # retrieve zipped screenshot scanned file for host
             file = retrieve_screenshot_scanned_file(host.ip_address)
             if file:

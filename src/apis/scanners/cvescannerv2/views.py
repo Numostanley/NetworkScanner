@@ -64,7 +64,6 @@ class CVEDownloadScanReportAPIView(AuthProtectedAPIView):
 class CVEScanResultAPIView(AuthProtectedAPIView):
 
     def get(self, request, *args, **kwargs):
-        
         query_params = request.query_params
 
         # get host key from the url query parameters
@@ -80,12 +79,14 @@ class CVEScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        cve_data = CVEScannerV2.get_cvescannerv2_by_host(host)
+        try:
+            cve_data = CVEScannerV2.get_cvescannerv2_by_host(host)
 
-        if cve_data.count() < 1:
-            return responses.http_response_404("No scan result for this host.")
+            if cve_data:
+                return responses.http_response_200('Data successfully retrieved!', cve_data)
 
-        if cve_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved', cve_data)
-
-        return responses.http_response_500('An error occurred!')
+            return responses.http_response_404("No scan result for this host!")
+        except Exception as e:
+            error_logs.logger.error('CVEScanResultAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')

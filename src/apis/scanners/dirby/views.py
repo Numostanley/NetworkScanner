@@ -23,7 +23,7 @@ class DirByScannerAPIView(AuthProtectedAPIView):
         try:
             # scan ip address as background task
             dirby_task.delay(host)
-            return responses.http_response_200('Scan in progress')
+            return responses.http_response_200('Scan in progress...')
         except Exception as e:
             error_logs.logger.error('DirByScannerAPIView.get@Error')
             error_logs.logger.error(e)
@@ -48,12 +48,14 @@ class DirByScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        dirby_data = DirBy.get_dirby_scan_by_host(host)
+        try:
+            dirby_data = DirBy.get_dirby_scan_by_host(host)
 
-        if dirby_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this host.")
+            if dirby_data:
+                return responses.http_response_200('Data successfully retrieved!', dirby_data)
 
-        if dirby_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved', dirby_data)
-
-        return responses.http_response_500('An error occurred!')
+            return responses.http_response_404("No scan result exists for this host!")
+        except Exception as e:
+            error_logs.logger.error('DirByScanResultAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')

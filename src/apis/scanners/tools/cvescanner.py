@@ -167,7 +167,9 @@ class CVEScanner(Scanner):
 
             logger.error("CVEScanner.get_host_port_list@Error")
             logger.error(e)
-            return {"message": "host is either down or has no open ports or CVEScan data"}
+            return {
+                "message": "host is either down or has no open ports or CVEScan data"
+            }
         finally:
             subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,

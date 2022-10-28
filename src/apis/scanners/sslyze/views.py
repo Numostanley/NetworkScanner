@@ -31,7 +31,7 @@ class SslyzeScannerAPIView(AuthProtectedAPIView):
 
 
 class SSLyzeScanResultAPIView(AuthProtectedAPIView):
-    
+
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
 
@@ -48,12 +48,14 @@ class SSLyzeScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        sslyze_data = SSLyze.get_sslyze_scan_by_host(host)
-        
-        if sslyze_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this host.")
+        try:
+            sslyze_data = SSLyze.get_sslyze_scan_by_host(host)
 
-        if sslyze_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved', sslyze_data)
+            if sslyze_data:
+                return responses.http_response_200('Data successfully retrieved!', sslyze_data)
 
-        return responses.http_response_500('An error occurred!')
+            return responses.http_response_404("No scan result exists for this host!")
+        except Exception as e:
+            error_logs.logger.error('SSLyzeScanResultAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')

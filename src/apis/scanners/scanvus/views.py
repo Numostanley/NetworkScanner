@@ -6,7 +6,6 @@ from .models import Scanvus
 from .tasks import scanvus_task
 from apis.scanners.tools.base import get_server_user
 
-# Create your views here.
 
 class ScanvusScannerAPIView(AuthProtectedAPIView):
     
@@ -34,18 +33,18 @@ class ScanvusScannerAPIView(AuthProtectedAPIView):
             key = request.FILES['key_file'].name
             
             if not key:
-                return responses.http_response_400('Key_file not specified!')
+                return responses.http_response_400('key_file not specified!')
             
             file_name, extension = key.split('.')
             
             # check for valid file extension
             if extension != 'pem' and extension != 'key':
-                return responses.http_response_400('key file not a valid format')
+                return responses.http_response_400('key file not a valid format!')
 
             # save key_file to a file path
             with open(f'/home/{get_server_user()}/tools/keys/{request.FILES["key_file"]}', 'wb') as f:
                 f.write(request.FILES["key_file"].read())
-           
+
         if not host:
             return responses.http_response_400('Host not specified!')
         
@@ -72,7 +71,7 @@ class ScanvusScanResultAPIView(AuthProtectedAPIView):
     
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
-        
+
         # get host key from the url query parameters
         if 'host' not in query_params:
             return responses.http_response_400('Host key not found in query parameters!')
@@ -86,12 +85,14 @@ class ScanvusScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        scanvus_data = Scanvus.get_scanvus_scan_by_host(host)
-        
-        if scanvus_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this host.")
+        try:
+            scanvus_data = Scanvus.get_scanvus_scan_by_host(host)
 
-        if scanvus_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved', scanvus_data)
+            if scanvus_data:
+                return responses.http_response_200('Data successfully retrieved!', scanvus_data)
 
-        return responses.http_response_500('An error occurred!')
+            return responses.http_response_404("No scan result exists for this host!")
+        except Exception as e:
+            error_logs.logger.error('ScanvusScanResultAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')

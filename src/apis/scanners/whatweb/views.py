@@ -48,12 +48,14 @@ class WhatWebScanResultAPIView(AuthProtectedAPIView):
         if not host:
             return responses.http_response_404('Host not found!')
 
-        whatweb_data = WhatWeb.get_whatweb_scan_by_host(host)
+        try:
+            whatweb_data = WhatWeb.get_whatweb_scan_by_host(host)
 
-        if whatweb_data.count() < 1:
-            return responses.http_response_404("No scan result exists for this host.")
+            if whatweb_data:
+                return responses.http_response_200('Data successfully retrieved!', whatweb_data)
 
-        if whatweb_data.count() > 0:
-            return responses.http_response_200('Data successfully retrieved', whatweb_data)
-
-        return responses.http_response_500('An error occurred!')
+            return responses.http_response_404("No scan result exists for this host!")
+        except Exception as e:
+            error_logs.logger.error('WhatWebScanResultAPIView.get@Error')
+            error_logs.logger.error(e)
+            return responses.http_response_500('An error occurred!')
