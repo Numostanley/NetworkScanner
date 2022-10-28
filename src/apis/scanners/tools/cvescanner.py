@@ -48,7 +48,7 @@ class CVEScanner(Scanner):
         self.mkdir_ip_scans_dir()
 
         # execute nmap script
-        xml_content = self.cmd.run(f'sudo nmap -oX ip_scans/{self.output_file} '
+        xml_content = self.cmd.run(f'nmap -oX ip_scans/{self.output_file} '
                                      f'-sV --script ./cvescannerv2.nse {self.ip_address}',
                                      shell=True)
 
@@ -143,7 +143,6 @@ class CVEScanner(Scanner):
                     })
 
                 self.data.append(result)
-
         except KeyError as e:  # either host is down
             # or no open ports or CVEScan data
 
@@ -152,11 +151,11 @@ class CVEScanner(Scanner):
                         capture_output=True,
                         shell=True,
                         check=True)
-
             logger.error("CVEScanner.get_host_port_list@Error")
             logger.error(e)
-            return {"message": "host is either down or has no open ports or CVEScan data"}
-        
+            return {
+                "message": "host is either down or has no open ports or CVEScan data"
+            }
         except TypeError as e: # either host is down
             # or no open ports or CVEScan data
 
@@ -169,11 +168,9 @@ class CVEScanner(Scanner):
             logger.error("CVEScanner.get_host_port_list@Error")
             logger.error(e)
             return {"message": "host is either down or has no open ports or CVEScan data"}
-        
         finally:
-            subprocess.run(f'sudo rm -f {self.output_file}',
+            subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
-            
         return self.data

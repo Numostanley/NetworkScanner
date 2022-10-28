@@ -33,7 +33,7 @@ class DirByScanner(Scanner):
         try:
              return open('result.json', 'r')
         finally:
-            self.cmd.run('sudo rm result.json', shell=True)
+            self.cmd.run('rm result.json', shell=True)
 
     def response(self):
         """return python object as response"""

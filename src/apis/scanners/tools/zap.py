@@ -34,7 +34,7 @@ class ZapScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('sudo mkdir ip_scans',
+            self.cmd.run('mkdir ip_scans',
                          capture_output=True,
                          shell=True,
                          check=True)
@@ -54,7 +54,7 @@ class ZapScanner(Scanner):
         try:
             return open(f'ip_scans/{sanitize_host(self.output_file)}.json', 'r')
         finally:
-            self.cmd.run(f'sudo rm -r ip_scans/{sanitize_host(self.output_file)}.json', shell=True)
+            self.cmd.run(f'rm -r ip_scans/{sanitize_host(self.output_file)}.json', shell=True)
 
     def response(self):
         """return response"""

@@ -81,10 +81,10 @@ class SslyzeScanner(Scanner):
                             shell=True,
                             check=True)
                 
-                return {"Response": "ERROR_NO_CONNECTIVITY"}
-            
+                return {
+                    "Response": "ERROR_NO_CONNECTIVITY"
+                }
             elif sslyze_result["server_scan_results"][0]["scan_status"] == "COMPLETED":
-                
                 if sslyze_result["server_scan_results"][0]["scan_result"]["certificate_info"]["status"] == "COMPLETED":
                 
                     result = {
@@ -124,7 +124,9 @@ class SslyzeScanner(Scanner):
                         shell=True,
                         check=True)
                     
-                    return {"Response": "SCAN_RESULT_CERTIFICATE_INFO_ERROR"}
+                    return {
+                        "Response": "SCAN_RESULT_CERTIFICATE_INFO_ERROR"
+                    }
                 
         except KeyError as e:
             # delete the created file if an error occured.
@@ -135,7 +137,9 @@ class SslyzeScanner(Scanner):
 
             logger.error("Key Error")
             logger.error(e)
-            return {"Response": f"Scan result does not contain {e}"}
+            return {
+                "Response": f"Scan result does not contain {e}"
+            }
         
         finally:
             subprocess.run(f'sudo rm -f {self.output_file}',
@@ -144,8 +148,4 @@ class SslyzeScanner(Scanner):
                         check=True)
             
         self.data.append(result)
-        
         return self.data
-    
-
-   

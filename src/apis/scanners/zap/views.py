@@ -1,9 +1,9 @@
 from apis.utils import responses, error_logs
-
 from apis.scanners.hosts.models import Host
 from apis.utils.views import AuthProtectedAPIView
 from .models import Zap
 from .tasks import zap_task
+
 
 class ZapScannerAPIView(AuthProtectedAPIView):
 
@@ -39,8 +39,9 @@ class ZapScannerAPIView(AuthProtectedAPIView):
             error_logs.logger.error(e)
             return responses.http_response_500('An error occurred!')
 
+
 class ZapScanResultAPIView(AuthProtectedAPIView):
-    
+
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
 
@@ -58,7 +59,7 @@ class ZapScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_404('Host not found!')
 
         zap_data = Zap.get_zap_scan_by_host(host)
-        
+
         if zap_data.count() < 1:
             return responses.http_response_404("No scan result exists for this host.")
 
@@ -66,4 +67,3 @@ class ZapScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_200('Data successfully retrieved', zap_data)
 
         return responses.http_response_500('An error occurred!')
-    

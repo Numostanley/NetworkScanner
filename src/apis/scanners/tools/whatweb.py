@@ -41,7 +41,7 @@ class WhatWebScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
 
-        self.cmd.run(f'sudo ./whatweb {self.ip_address} '
+        self.cmd.run(f'./whatweb {self.ip_address} '
                         f'--log-json=ip_scans/{self.output_file}',
                         shell=True)
 
@@ -51,7 +51,7 @@ class WhatWebScanner(Scanner):
                                 text=True,
                                 capture_output=True).stdout
         finally:
-            self.cmd.run(f'sudo rm -r ip_scans/{self.output_file}', shell=True)
+            self.cmd.run(f'rm -r ip_scans/{self.output_file}', shell=True)
 
     def response(self):
         """return response"""

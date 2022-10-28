@@ -49,10 +49,10 @@ class WapitiScanner(Scanner):
         
         # create json file for the ip to be scanned
         try:
-            self.cmd.run(f'sudo touch {self.output_file}',
-                        capture_output=True,
-                            shell=True,
-                            check=True)
+            self.cmd.run(f'touch {self.output_file}',
+                         capture_output=True,
+                         shell=True,
+                         check=True)
         except subprocess.CalledProcessError:
             # if `type > {output_file}` command raises an error, skip because
             # output_file has already been created
@@ -81,31 +81,26 @@ class WapitiScanner(Scanner):
         retrieve list of vulnerabilities from the result
         """
         try:
-            
             result = [
                 wapiti_result['vulnerabilities'],
                 wapiti_result['anomalies'],
                 wapiti_result['infos'],
             ]
-            
             for re in result:
                 self.data.append(re)
-                
         except KeyError as e: # no vulnerability data
             subprocess.run(f'sudo rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
-
             logger.error("Key Error")
             logger.error(e)
-            return {"Response": f"Scan result does not contain {e}"}
-        
+            return {
+                "Response": f"Scan result does not contain {e}"
+            }
         finally:
             subprocess.run(f'sudo rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
-             
         return self.data
-

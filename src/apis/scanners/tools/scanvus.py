@@ -45,36 +45,35 @@ class ScanvusScanner(Scanner):
 
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
-        
-        if self.password != "":
-            self.cmd.run(f'sudo python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
+
+        # if password is given, execute scanvus with the username and password
+        if self.password:
+            self.cmd.run(f'python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
                                  f'--user-name {self.username} --password {self.password} '
                                  f'--save-vuln-report-json-path ip_scans/{self.output_file}',
                                  shell=True)
-        
-        if self.key != "":
-            self.cmd.run(f'sudo python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
+
+        # if key is given, execute scanvus with the username and key
+        if self.key:
+            self.cmd.run(f'python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
                                  f'--user-name {self.username} --key ~/tools/keys/{self.key} '
                                  f'--save-vuln-report-json-path ip_scans/{self.output_file}',
                                  shell=True)
-        
-        self.cmd.run(f'sudo rm ~/tools/keys/{self.key}', shell=True)
-        
+
+        self.cmd.run(f'rm ~/tools/keys/{self.key}', shell=True)
+
         # cd into ip_scans directory
         self.server_os.chdir("ip_scans")
         try:
-            # open the JSON file to ensure it was created.
-            with open(self.output_file, 'r') as f:
-                json_output = f.read()
-                
-                return json_output
-            
+            # return an opened file
+            return open(self.output_file, 'r')
+
         finally:
-            subprocess.run(f'sudo rm -f {self.output_file}',
+            subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
-            
+
     def response(self):
         """return json object as response"""
-        return json.loads(self.scan())
+        return json.load(self.scan())
