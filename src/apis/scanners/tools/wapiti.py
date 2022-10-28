@@ -89,7 +89,7 @@ class WapitiScanner(Scanner):
             for re in result:
                 self.data.append(re)
         except KeyError as e: # no vulnerability data
-            subprocess.run(f'sudo rm -f {self.output_file}',
+            subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
@@ -99,7 +99,7 @@ class WapitiScanner(Scanner):
                 "Response": f"Scan result does not contain {e}"
             }
         finally:
-            subprocess.run(f'sudo rm -f {self.output_file}',
+            subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
