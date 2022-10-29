@@ -56,7 +56,7 @@ class ScreenShotScanner(Scanner):
             logger.error(e)
             return None
         finally:
-            self.cmd.run(f'sudo rm -r bigbrowser_report/{self.zip_output_file}')
+            self.cmd.run(f'rm -r bigbrowser_report/{self.zip_output_file}')
 
     def response(self):
         """return response"""

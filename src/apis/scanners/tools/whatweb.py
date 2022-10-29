@@ -24,7 +24,7 @@ class WhatWebScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('sudo mkdir ip_scans',
+            self.cmd.run('mkdir ip_scans',
                          capture_output=True,
                          shell=True,
                          check=True)
