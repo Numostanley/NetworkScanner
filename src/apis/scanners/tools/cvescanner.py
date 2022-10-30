@@ -48,7 +48,7 @@ class CVEScanner(Scanner):
         self.mkdir_ip_scans_dir()
 
         # execute nmap script
-        xml_content = self.cmd.run(f'nmap -oX ip_scans/{self.output_file} '
+        xml_content = self.cmd.run(f'sudo nmap -oX ip_scans/{self.output_file} '
                                      f'-sV --script ./cvescannerv2.nse {self.ip_address}',
                                      shell=True)
 
@@ -58,25 +58,29 @@ class CVEScanner(Scanner):
         # open the xml file to ensure it was created.
         with open(self.output_file, 'r') as f:
             xml_file = f.read()
-            
-            # parse nmap xml result to dict values
-            nmap_results = xmltodict.parse(xml_file)
-
-            results = self.get_host_port_list(nmap_results)
-            return results
+                    
+        # parse nmap xml result to dict values
+        nmap_results = xmltodict.parse(xml_file)
+        
+        json_result = json.dumps(nmap_results, indent=4, sort_keys=True)
+        
+        results = self.get_host_port_list(json_result)
+        return results
 
     def response(self):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
 
-    def get_host_port_list(self, nmap_results):
+    def get_host_port_list(self, json_result):
         """
         retrieve list of ports from the result
         """
-
-        nmap_port_list = nmap_results['nmaprun']['host']['ports']['port']
+        nmap_results = json.loads(json_result)
+        
         try:
+            nmap_port_list = nmap_results['nmaprun']['host']['ports']['port']
+            
             for port in nmap_port_list:
                 result = {
                     "port": port['@portid'],
@@ -86,8 +90,11 @@ class CVEScanner(Scanner):
                 }
 
                 port_index = nmap_port_list.index(port)
-
-                nmap_script = nmap_port_list[port_index]['script']
+                
+                try:
+                    nmap_script = nmap_port_list[port_index]['script']
+                except KeyError as e: #no cvescannerV2 script data available
+                    pass
 
                 if isinstance(nmap_script, dict):
                     item_elements = nmap_script['elem']
@@ -156,20 +163,7 @@ class CVEScanner(Scanner):
             return {
                 "message": "host is either down or has no open ports or CVEScan data"
             }
-        except TypeError as e: # either host is down
-            # or no open ports or CVEScan data
-
-            # delete the created file if an error occurred.
-            subprocess.run(f'rm -f {self.output_file}',
-                        capture_output=True,
-                        shell=True,
-                        check=True)
-
-            logger.error("CVEScanner.get_host_port_list@Error")
-            logger.error(e)
-            return {
-                "message": "host is either down or has no open ports or CVEScan data"
-            }
+     
         finally:
             subprocess.run(f'rm -f {self.output_file}',
                         capture_output=True,
