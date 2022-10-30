@@ -82,74 +82,84 @@ class CVEScanner(Scanner):
             nmap_port_list = nmap_results['nmaprun']['host']['ports']['port']
             
             for port in nmap_port_list:
-                result = {
-                    "port": port['@portid'],
-                    "protocol": port['@protocol'],
-                    "state": port['state']['@state'],
-                    "service-name": port['service']['@name'],
-                }
+                if isinstance(port, dict):
+                    result = {
+                        "port": port['@portid'],
+                        "protocol": port['@protocol'],
+                        "state": port['state']['@state'],
+                        "service-name": port['service']['@name'],
+                    }
+                if isinstance(port, list):
+                    result = {
+                        "port": port[0],
+                        "protocol": port[1],
+                        "state": port[3]['@state'],
+                        "service-name": port[2]['@name'],
+                    }
 
-                port_index = nmap_port_list.index(port)
-                
                 try:
+                    port_index = nmap_port_list.index(port)
                     nmap_script = nmap_port_list[port_index]['script']
-                except KeyError as e: #no cvescannerV2 script data available
+                except (KeyError, AttributeError): #no cvescannerV2 script data available
                     pass
+                try:
+                    if isinstance(nmap_script, dict):
+                        item_elements = nmap_script['elem']
 
-                if isinstance(nmap_script, dict):
-                    item_elements = nmap_script['elem']
+                        cve_results = item_elements[5:]
+                        CvE_Data = []
 
-                    cve_results = item_elements[5:]
-                    CvE_Data = []
+                        for item in cve_results:
+                            cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
 
-                    for item in cve_results:
-                        cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+                            cve_dict = {
+                                "cveid": cve_id.strip(),
+                                "csvssv2": cvssv2.strip(),
+                                "csvssv3": cvssv3.strip(),
+                                "exploitdb": exploitdb.strip(),
+                                "metasploit": metasploit.strip()
+                            }
 
-                        cve_dict = {
-                            "cveid": cve_id.strip(),
-                            "csvssv2": cvssv2.strip(),
-                            "csvssv3": cvssv3.strip(),
-                            "exploitdb": exploitdb.strip(),
-                            "metasploit": metasploit.strip()
-                        }
+                            CvE_Data.append(cve_dict)
 
-                        CvE_Data.append(cve_dict)
+                        result.update({
+                            "Product": item_elements[0],
+                            "version": item_elements[1],
+                            "cves": item_elements[3],
+                            "CVE_Data": CvE_Data
+                        })
 
-                    result.update({
-                        "Product": item_elements[0],
-                        "version": item_elements[1],
-                        "cves": item_elements[3],
-                        "CVE_Data": CvE_Data
-                    })
+                    if isinstance(nmap_script, list):
+                        first_item = nmap_script[0]
+                        item_elements = first_item['elem']
 
-                if isinstance(nmap_script, list):
-                    first_item = nmap_script[0]
-                    item_elements = first_item['elem']
+                        cve_results = item_elements[5:]
+                        cve_data = []
 
-                    cve_results = item_elements[5:]
-                    cve_data = []
+                        for item in cve_results:
+                            cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
 
-                    for item in cve_results:
-                        cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+                            cve_dict = {
+                                "cveid": cve_id.strip(),
+                                "csvssv2": cvssv2.strip(),
+                                "csvssv3": cvssv3.strip(),
+                                "exploitdb": exploitdb.strip(),
+                                "metasploit": metasploit.strip()
+                            }
 
-                        cve_dict = {
-                            "cveid": cve_id.strip(),
-                            "csvssv2": cvssv2.strip(),
-                            "csvssv3": cvssv3.strip(),
-                            "exploitdb": exploitdb.strip(),
-                            "metasploit": metasploit.strip()
-                        }
+                            cve_data.append(cve_dict)
 
-                        cve_data.append(cve_dict)
+                        result.update({
+                            "Product": item_elements[0],
+                            "version": item_elements[1],
+                            "cves": item_elements[3],
+                            "CVE_Data": cve_data
+                        })
 
-                    result.update({
-                        "Product": item_elements[0],
-                        "version": item_elements[1],
-                        "cves": item_elements[3],
-                        "CVE_Data": cve_data
-                    })
-
-                self.data.append(result)
+                    self.data.append(result)
+                except UnboundLocalError:
+                    pass
+                
         except KeyError as e:  # either host is down
             # or no open ports or CVEScan data
 
