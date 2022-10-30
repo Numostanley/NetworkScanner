@@ -1,9 +1,10 @@
+import json
+
 from django.test import TestCase
 
 from apis.scanners.base.tests import BASE_URL
 from apis.scanners.hosts.models import Host
 from apis.scanners.scanvus.models import Scanvus
-import json
 
 
 class ScanvusScannerTest(TestCase):
@@ -48,13 +49,13 @@ class ScanvusScanResultTest(TestCase):
         self.create_host_with_no_scan_results = Host.create_host('193.122.66.53')
         
         self.found_host_with_result = Host.get_host('3.101.140.30')
-        self.found_host_with_no_result_scan = Host.get_host('193.122.66.53')
+        self.found_host_with_no_result = Host.get_host('193.122.66.53')
         self.not_found_host = Host.get_host('122.121.33.45')
         
         self.create_scanvus_scan = Scanvus.create_scanvus_scan(self.found_host_with_result, scanvus_data[0]['fields'])
 
         self.get_scanvus_scan_with_result = Scanvus.get_scanvus_scan_by_host(self.found_host_with_result)
-        self.get_scanvus_scan_with_no_result = Scanvus.get_scanvus_scan_by_host(self.found_host_with_no_result_scan)
+        self.get_scanvus_scan_with_no_result = Scanvus.get_scanvus_scan_by_host(self.found_host_with_no_result)
         
     def test_host_key_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/scanvus/get-result?')
@@ -74,7 +75,7 @@ class ScanvusScanResultTest(TestCase):
         
     def test_scanvus_scan_result_does_not_exist_for_host(self):
         response = self.client.get(
-            f'{BASE_URL}/scanvus/get-result?host={self.found_host_with_no_result_scan}'
+            f'{BASE_URL}/scanvus/get-result?host={self.found_host_with_no_result}'
         )
         self.assertEqual(response.status_code, 404)
         
