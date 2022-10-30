@@ -179,4 +179,9 @@ class CVEScanner(Scanner):
                         capture_output=True,
                         shell=True,
                         check=True)
-        return self.data
+        if self.data:
+            return self.data
+        else:
+            return {
+                "message": "host is either down or has no open ports or CVEScan data"
+            }
