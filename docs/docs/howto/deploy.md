@@ -53,13 +53,13 @@ Nginx:
 sudo apt install nginx
 ```
 
-Python3-pip
+Python3-pip:
 
 ```
 sudo apt install python3-pip
 ```
 
-Lua && Nmap
+Lua && Nmap:
 
 ```
 sudo apt-get install -y lua-sql-sqlite3
@@ -100,15 +100,15 @@ SSLyze:
 
 ```git clone https://github.com/nabla-c0d3/sslyze.git```
 
-WafW00f
+WafW00f:
 
 ```git clone https://github.com/EnableSecurity/wafw00f```
 
-WhatWeb
+WhatWeb:
 
 ```git clone https://github.com/urbanadventurer/WhatWeb.git```
 
-Wapiti
+Wapiti:
 
 ```sudo apt install wapiti```
 
@@ -125,7 +125,7 @@ pip3 install -r requirements.txt
 python3 ./database.py
 ```
 
-Dirby
+Dirby:
 
 ```
 cd dirby/
