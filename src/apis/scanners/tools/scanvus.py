@@ -66,7 +66,12 @@ class ScanvusScanner(Scanner):
         self.server_os.chdir("ip_scans")
         try:
             # return an opened file
-            return open(self.output_file, 'r')
+            with open(self.output_file, 'r') as f:
+                opened_file = f.read()
+            return opened_file
+
+        except FileNotFoundError: #Error in scan credentials
+            return json.dumps({"message":"Scan unsuccessful. Check credentials."})
 
         finally:
             subprocess.run(f'rm -f {self.output_file}',
@@ -76,4 +81,4 @@ class ScanvusScanner(Scanner):
 
     def response(self):
         """return json object as response"""
-        return json.load(self.scan())
+        return json.loads(self.scan())

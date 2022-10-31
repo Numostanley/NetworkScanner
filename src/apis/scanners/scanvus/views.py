@@ -38,7 +38,7 @@ class ScanvusScannerAPIView(AuthProtectedAPIView):
             file_name, extension = key.split('.')
             
             # check for valid file extension
-            if extension != 'pem' and extension != 'key':
+            if extension == 'ppk':
                 return responses.http_response_400('key file not a valid format!')
 
             # save key_file to a file path
