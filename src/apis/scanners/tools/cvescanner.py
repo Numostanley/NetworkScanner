@@ -63,7 +63,7 @@ class CVEScanner(Scanner):
         nmap_results = xmltodict.parse(xml_file)
         
         json_result = json.dumps(nmap_results, indent=4, sort_keys=True)
-        
+      
         results = self.get_host_port_list(json_result)
         return results
 
@@ -110,21 +110,29 @@ class CVEScanner(Scanner):
                         CvE_Data = []
 
                         for item in cve_results:
-                            cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+                            data =[value for value in re.split(r"\t+", item)] 
+                            # cve_id, cvssv2, cvssv3, exploitdb, metasploit
+                            if len(data) == 5:
+                                cve_dict = {
+                                    "cveid": data[0].strip(),
+                                    "csvssv2": data[1].strip(),
+                                    "csvssv3": data[2].strip(),
+                                    "exploitdb": data[3].strip(),
+                                    "metasploit": data[4].strip()
+                                }
 
-                            cve_dict = {
-                                "cveid": cve_id.strip(),
-                                "csvssv2": cvssv2.strip(),
-                                "csvssv3": cvssv3.strip(),
-                                "exploitdb": exploitdb.strip(),
-                                "metasploit": metasploit.strip()
-                            }
-
-                            CvE_Data.append(cve_dict)
-
+                                CvE_Data.append(cve_dict)
+                             
+                        if item_elements[0][:7] == 'product':
+                            product = item_elements[0]
+                            version = item_elements[1]
+                        else:
+                            product = None
+                            version = None
+                            
                         result.update({
-                            "Product": item_elements[0],
-                            "version": item_elements[1],
+                            "Product": product,
+                            "version": version,
                             "cves": item_elements[3],
                             "CVE_Data": CvE_Data
                         })
@@ -137,21 +145,30 @@ class CVEScanner(Scanner):
                         cve_data = []
 
                         for item in cve_results:
-                            cve_id, cvssv2, cvssv3, exploitdb, metasploit = re.split(r"\t+", item)
+                           
+                            data =[value for value in re.split(r"\t+", item)] 
+                            # cve_id, cvssv2, cvssv3, exploitdb, metasploit
+                            if len(data) == 5:
+                                cve_dict = {
+                                    "cveid": data[0].strip(),
+                                    "csvssv2": data[1].strip(),
+                                    "csvssv3": data[2].strip(),
+                                    "exploitdb": data[3].strip(),
+                                    "metasploit": data[4].strip()
+                                }
 
-                            cve_dict = {
-                                "cveid": cve_id.strip(),
-                                "csvssv2": cvssv2.strip(),
-                                "csvssv3": cvssv3.strip(),
-                                "exploitdb": exploitdb.strip(),
-                                "metasploit": metasploit.strip()
-                            }
-
-                            cve_data.append(cve_dict)
-
+                                cve_data.append(cve_dict)
+                      
+                        if item_elements[0][:7] == 'product':
+                            product = item_elements[0]
+                            version = item_elements[1]
+                        else:
+                            product = None
+                            version = None
+                            
                         result.update({
-                            "Product": item_elements[0],
-                            "version": item_elements[1],
+                            "Product": product,
+                            "version": version,
                             "cves": item_elements[3],
                             "CVE_Data": cve_data
                         })
