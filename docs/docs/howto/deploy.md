@@ -59,6 +59,14 @@ Python3-pip
 sudo apt install python3-pip
 ```
 
+Lua && Nmap
+
+```
+sudo apt-get install -y lua-sql-sqlite3
+
+sudo apt-get install nmap
+```
+
 
 ## Cloning Scanning Tools
 
