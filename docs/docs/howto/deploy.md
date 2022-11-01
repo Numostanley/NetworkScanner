@@ -184,7 +184,9 @@ git clone https://github.com/nabla-c0d3/sslyze.git
 
 cd sslyze/
 
-pip install .
+pip install --upgrade pip setuptools wheel
+
+pip install --upgrade sslyze
 ```
 
 `cd` out of sslyze
