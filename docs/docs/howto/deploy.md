@@ -49,19 +49,19 @@ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://pack
 
 sudo apt-get update
 
-sudo apt-get install redis
+sudo apt-get install redis -y
 ```
 
 **Nginx:**
 
 ```
-sudo apt install nginx
+sudo apt install nginx -y
 ```
 
 **Python3-pip:**
 
 ```
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 ```
 
 **Lua && Nmap:**
@@ -69,13 +69,13 @@ sudo apt install python3-pip
 ```
 sudo apt-get install -y lua-sql-sqlite3
 
-sudo apt-get install nmap
+sudo apt-get install nmap -y
 ```
 
 **Ruby:**
 
 ```
-sudo apt install ruby-full
+sudo apt install ruby-full -y
 
 gem install address
 ```
@@ -83,21 +83,35 @@ gem install address
 **Java:**
 
 ```
-sudo apt install openjdk-11-jre
+sudo apt install openjdk-11-jre -y
 
-sudo apt install openjdk-11-jdk
+sudo apt install openjdk-11-jdk -y
 ```
 
 **Zap:**
 <br>
-**Note: Install the latest version of ZAP as at the time of configuration**
+**Note: Install and Modify ZAP's version to the latest version during deployment**
+
 ```
 wget https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Linux.tar.gz
 
-mkdir ZAP
+tar -xf ZAP_2.12.0_Linux.tar.gz
 
-tar -xf ZAP_2.12.0_Linux.tar.gz -C ZAP/
+mv ZAP_2.12.0 ZAP
 ```
+
+**PhantomJS:**
+
+```
+sudo apt install phantomjs -y
+```
+
+**xvfb:**
+
+```
+sudo apt install xvfb -y
+```
+
 
 ## Cloning Scanning Tools
 
@@ -199,7 +213,7 @@ git clone https://github.com/urbanadventurer/WhatWeb.git
 **Wapiti:**
 
 ```
-sudo apt install wapiti
+sudo apt install wapiti -y
 ```
 
 
