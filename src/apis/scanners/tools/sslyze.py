@@ -21,7 +21,7 @@ class SslyzeScanner(Scanner):
 
     def change_directory(self):
         # cd to the SSLYZE directory
-        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}_result")
+        self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
     def mkdir_ip_scans_dir(self):
         """create ip_scans directory"""

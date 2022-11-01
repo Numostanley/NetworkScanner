@@ -3,9 +3,7 @@ script to run the CVEScannerV2 scan on the host
 """
 
 import json
-import re
 import subprocess
-
 import xmltodict
 
 from apis.utils.error_logs import logger
@@ -63,7 +61,7 @@ class CVEScanner(Scanner):
         nmap_results = xmltodict.parse(xml_file)
         
         json_result = json.dumps(nmap_results, indent=4, sort_keys=True)
-      
+
         results = self.get_host_port_list(json_result)
         return results
 
@@ -97,11 +95,11 @@ class CVEScanner(Scanner):
                         "service-name": port[2]['@name'],
                     }
 
+                port_index = nmap_port_list.index(port)
                 try:
-                    port_index = nmap_port_list.index(port)
                     nmap_script = nmap_port_list[port_index]['script']
-                except (KeyError, AttributeError): #no cvescannerV2 script data available
-                    pass
+                except KeyError:
+                    continue
                 try:
                     if isinstance(nmap_script, dict):
                         item_elements = nmap_script['elem']
@@ -110,7 +108,8 @@ class CVEScanner(Scanner):
                         CvE_Data = []
 
                         for item in cve_results:
-                            data =[value for value in re.split(r"\t+", item)] 
+                            
+                            data =[value for value in item.split("\t")]
                             # cve_id, cvssv2, cvssv3, exploitdb, metasploit
                             if len(data) == 5:
                                 cve_dict = {
@@ -145,8 +144,8 @@ class CVEScanner(Scanner):
                         cve_data = []
 
                         for item in cve_results:
-                           
-                            data =[value for value in re.split(r"\t+", item)] 
+                            
+                            data =[value for value in item.split("\t")]
                             # cve_id, cvssv2, cvssv3, exploitdb, metasploit
                             if len(data) == 5:
                                 cve_dict = {
@@ -177,15 +176,15 @@ class CVEScanner(Scanner):
                 except UnboundLocalError:
                     pass
                 
-        except KeyError as e:  # either host is down
-            # or no open ports or CVEScan data
+        except (KeyError, AttributeError) as e:  # either host is down
+            # or no open ports
 
             logger.error("CVEScanner.get_host_port_list@Error")
             logger.error(e)
             pass
      
         finally:
-            subprocess.run(f'rm -f {self.output_file}',
+            self.cmd.run(f'rm -f {self.output_file}',
                         capture_output=True,
                         shell=True,
                         check=True)
