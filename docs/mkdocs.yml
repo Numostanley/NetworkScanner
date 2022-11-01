@@ -1,6 +1,6 @@
 site_name: Vulnerability Scanner Docs
 
-#repo_url: https://github.com/CyberMeStudio/VulnScanner
+#repo_url: https://github.com/CyberMeStudio/VulnScanner.git
 
 # Theme
 theme:
