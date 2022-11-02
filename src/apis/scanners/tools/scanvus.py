@@ -29,9 +29,8 @@ class ScanvusScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                            capture_output=True,
-                           shell=True,
                            check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -48,19 +47,17 @@ class ScanvusScanner(Scanner):
 
         # if password is given, execute scanvus with the username and password
         if self.password:
-            self.cmd.run(f'python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
-                                 f'--user-name {self.username} --password {self.password} '
-                                 f'--save-vuln-report-json-path ip_scans/{self.output_file}',
-                                 shell=True)
+            self.cmd.run(['python3', 'scanvus.py', '--assessment-type', 'remote_ssh', '--host', f'{self.ip_address}', 
+                                 '--user-name', f'{self.username}', '--password', f'{self.password}',
+                                 '--save-vuln-report-json-path', f'ip_scans/{self.output_file}'])
 
         # if key is given, execute scanvus with the username and key
         if self.key:
-            self.cmd.run(f'python3 scanvus.py --assessment-type remote_ssh --host {self.ip_address} '
-                                 f'--user-name {self.username} --key ~/tools/keys/{self.key} '
-                                 f'--save-vuln-report-json-path ip_scans/{self.output_file}',
-                                 shell=True)
+            self.cmd.run([f'python3', 'scanvus.py', '--assessment-type', 'remote_ssh', '--host', f'{self.ip_address}',
+                                 '--user-name', f'{self.username}', '--key', f'/home/{get_server_user()}/tools/keys/{self.key}',
+                                 '--save-vuln-report-json-path', f'ip_scans/{self.output_file}'])
 
-        self.cmd.run(f'rm ~/tools/keys/{self.key}', shell=True)
+        self.cmd.run(['rm', f'/home/{get_server_user()}/tools/keys/{self.key}'])
 
         # cd into ip_scans directory
         self.server_os.chdir("ip_scans")
@@ -74,9 +71,8 @@ class ScanvusScanner(Scanner):
             return json.dumps({"message":"Scan unsuccessful. Check credentials."})
 
         finally:
-            subprocess.run(f'rm -f {self.output_file}',
+            subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
 
     def response(self):

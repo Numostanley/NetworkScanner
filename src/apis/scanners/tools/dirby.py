@@ -27,13 +27,12 @@ class DirByScanner(Scanner):
         self.change_directory()
 
         # execute dirby.py
-        self.cmd.run(f'python3 dirby.py --scheme https --host {self.host} --port 443 '
-                     '--wordlist ./wordlists/common.txt',
-                     shell=True)
+        self.cmd.run(['python3', 'dirby.py', '--scheme', 'https', '--host', f'{self.host}', '--port', '443', 
+                     '--wordlist', './wordlists/common.txt'])
         try:
              return open('result.json', 'r')
         finally:
-            self.cmd.run('rm result.json', shell=True)
+            self.cmd.run(['rm', 'result.json'])
 
     def response(self):
         """return python object as response"""

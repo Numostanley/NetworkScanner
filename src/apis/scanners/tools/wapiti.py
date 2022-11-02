@@ -27,9 +27,8 @@ class WapitiScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run(f'mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                            capture_output=True,
-                           shell=True,
                            check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -49,18 +48,16 @@ class WapitiScanner(Scanner):
         
         # create json file for the ip to be scanned
         try:
-            self.cmd.run(f'touch {self.output_file}',
+            self.cmd.run(['touch', f'{self.output_file}'],
                          capture_output=True,
-                         shell=True,
                          check=True)
         except subprocess.CalledProcessError:
             # if `type > {output_file}` command raises an error, skip because
             # output_file has already been created
             pass
         
-        self.cmd.run(f"wapiti -u https://{self.ip_address}/"
-                        f" -f json -o /home/{get_server_user()}/tools/{self.tool}/ip_scans/{self.output_file}",
-                        shell=True)
+        self.cmd.run(['wapiti', '-u', f'https://{self.ip_address}/',
+                        '-f', 'json', '-o', f'/home/{get_server_user()}/tools/{self.tool}/ip_scans/{self.output_file}'])
         
         # open the JSON file to ensure it was created.
         with open(self.output_file, 'r') as f:
@@ -89,9 +86,8 @@ class WapitiScanner(Scanner):
             for re in result:
                 self.data.append(re)
         except KeyError as e: # no vulnerability data
-            subprocess.run(f'rm -f {self.output_file}',
+            subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
             logger.error("Key Error")
             logger.error(e)
@@ -99,8 +95,7 @@ class WapitiScanner(Scanner):
                 "Response": f"Scan result does not contain {e}"
             }
         finally:
-            subprocess.run(f'rm -f {self.output_file}',
+            subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
         return self.data

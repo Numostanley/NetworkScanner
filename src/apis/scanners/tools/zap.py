@@ -34,9 +34,8 @@ class ZapScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                          capture_output=True,
-                         shell=True,
                          check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -49,12 +48,12 @@ class ZapScanner(Scanner):
 
         self.mkdir_ip_scans_dir()
 
-        self.cmd.run(f'python3 ./zap_api_script.py '
-                     f'{self.api_key} {self.host} --json_output=ip_scans/{sanitize_host(self.output_file)}', shell=True)
+        self.cmd.run(['python3', './zap_api_script.py',
+                     f'{self.api_key}', f'{self.host}', f'--json_output=ip_scans/{sanitize_host(self.output_file)}'])
         try:
             return open(f'ip_scans/{sanitize_host(self.output_file)}.json', 'r')
         finally:
-            self.cmd.run(f'rm -r ip_scans/{sanitize_host(self.output_file)}.json', shell=True)
+            self.cmd.run(['rm', '-r', f'ip_scans/{sanitize_host(self.output_file)}.json'])
 
     def response(self):
         """return response"""

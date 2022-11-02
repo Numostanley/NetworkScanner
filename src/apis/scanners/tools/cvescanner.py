@@ -28,9 +28,8 @@ class CVEScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                            capture_output=True,
-                           shell=True,
                            check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -46,9 +45,8 @@ class CVEScanner(Scanner):
         self.mkdir_ip_scans_dir()
 
         # execute nmap script
-        xml_content = self.cmd.run(f'sudo nmap -oX ip_scans/{self.output_file} '
-                                     f'-sV --script ./cvescannerv2.nse {self.ip_address}',
-                                     shell=True)
+        xml_content = self.cmd.run(['sudo', 'nmap', '-oX', f'ip_scans/{self.output_file}', 
+                                     '-sV', '--script', './cvescannerv2.nse', f'{self.ip_address}'])
 
         # cd into ip_scans directory
         self.server_os.chdir("ip_scans")
@@ -184,9 +182,8 @@ class CVEScanner(Scanner):
             pass
      
         finally:
-            self.cmd.run(f'rm -f {self.output_file}',
+            self.cmd.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
         if self.data:
             return self.data

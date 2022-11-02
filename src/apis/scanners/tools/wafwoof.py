@@ -24,9 +24,8 @@ class WafWoofScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                          capture_output=True,
-                         shell=True,
                          check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -41,8 +40,7 @@ class WafWoofScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
         try:
-            self.cmd.run(f'wafw00f {self.ip_address} -o ip_scans/{self.output_file} -f json',
-                        shell=True)
+            self.cmd.run(['wafw00f', f'{self.ip_address}', '-o', f'ip_scans/{self.output_file}', '-f', 'json'])
 
             # cd into ip_scans directory
             self.server_os.chdir("ip_scans")
@@ -53,7 +51,7 @@ class WafWoofScanner(Scanner):
                 
                 return json_output
         finally:
-            self.cmd.run(f'rm -f {self.output_file}', shell=True)
+            self.cmd.run(['rm', '-f', f'{self.output_file}'])
 
     def response(self):
         """return response"""
