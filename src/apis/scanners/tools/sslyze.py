@@ -27,9 +27,8 @@ class SslyzeScanner(Scanner):
         """create ip_scans directory"""
         try:
             # create ip_scans directory
-            self.cmd.run('mkdir ip_scans',
+            self.cmd.run(['mkdir', 'ip_scans'],
                            capture_output=True,
-                           shell=True,
                            check=True)
         except subprocess.CalledProcessError:
             # if `mkdir ip_scans` command raises an error, skip because
@@ -44,9 +43,8 @@ class SslyzeScanner(Scanner):
         # create ip_scans dir
         self.mkdir_ip_scans_dir()
         
-        self.cmd.run(f'python3 -m sslyze {self.ip_address} '
-                                 f'--json_out=ip_scans/{self.output_file}',
-                                 shell=True)   
+        self.cmd.run(['python3', '-m', 'sslyze', f'{self.ip_address}',
+                                 f'--json_out=ip_scans/{self.output_file}'])   
 
         # cd into ip_scans directory
         self.server_os.chdir("ip_scans")
@@ -76,9 +74,8 @@ class SslyzeScanner(Scanner):
                 # No connection was made with the server
                 
                 # delete the created file if an error occurred.
-                subprocess.run(f'rm -f {self.output_file}',
+                subprocess.run(['rm', '-f', f'{self.output_file}'],
                             capture_output=True,
-                            shell=True,
                             check=True)
                 
                 return {
@@ -119,9 +116,8 @@ class SslyzeScanner(Scanner):
                         
                     }
                 else:
-                    subprocess.run(f'rm -f {self.output_file}',
+                    subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
                     
                     return {
@@ -129,9 +125,8 @@ class SslyzeScanner(Scanner):
                     }
         except KeyError as e:
             # delete the created file if an error occured.
-            subprocess.run(f'rm -f {self.output_file}',
+            subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
 
             logger.error("Key Error")
@@ -140,9 +135,8 @@ class SslyzeScanner(Scanner):
                 "Response": f"Scan result does not contain {e}"
             }
         finally:
-            subprocess.run(f'rm -f {self.output_file}',
+            subprocess.run(['rm', '-f', f'{self.output_file}'],
                         capture_output=True,
-                        shell=True,
                         check=True)
             
         self.data.append(result)
