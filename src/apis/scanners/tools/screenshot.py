@@ -32,20 +32,18 @@ class ScreenShotScanner(Scanner):
 
         try:
             # scan host with nmap
-            self.cmd.run(f'nmap -oX {self.xml_output_file} -sV {self.host}',
-                         shell=True,
+            self.cmd.run(['nmap', '-oX', f'{self.xml_output_file}', '-sV', f'{self.host}'],
                          capture_output=True,
                          text=True,
                          check=True)
 
             # execute BigBrowser command and create bigbrowser_report/
-            self.cmd.run(f'xvfb-run ./BigBrowser.py {self.xml_output_file} {self.host}',
-                         shell=True,
+            self.cmd.run(['xvfb-run', './BigBrowser.py', f'{self.xml_output_file}', f'{self.host}'],
                          capture_output=True,
                          text=True,
                          check=True)
 
-            source = f'bigbrowser_report/{self.zip_output_file}'  # generated zip file
+            source = f'bigbrowser_report/{self.zip_output_file}'  # generated zip file from BigBrowser.py
             destination = '/root/VulnScanner-AppData'
 
             # move source file to destination
@@ -56,7 +54,7 @@ class ScreenShotScanner(Scanner):
             logger.error(e)
             return None
         finally:
-            self.cmd.run(f'rm -r bigbrowser_report/{self.zip_output_file}')
+            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'])
 
     def response(self):
         """return response"""
