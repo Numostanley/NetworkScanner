@@ -6,6 +6,7 @@ import subprocess
 
 from apis.utils.error_logs import logger
 from apis.scanners.utils.extras import s3_filesystem_move, sanitize_host
+from core.extras import env_vars
 from .base import Scanner, get_server_user
 
 
@@ -44,7 +45,7 @@ class ScreenShotScanner(Scanner):
                          check=True)
 
             source = f'bigbrowser_report/{self.zip_output_file}'  # generated zip file from BigBrowser.py
-            destination = '/root/VulnScanner-AppData'
+            destination = env_vars.S3_DIR_PATH
 
             # move source file to destination
             s3_filesystem_move(source, destination)

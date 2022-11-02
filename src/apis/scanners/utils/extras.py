@@ -5,6 +5,8 @@ from pathlib import Path
 
 from s3fs.core import S3FileSystem
 
+from core.extras import env_vars
+
 
 def convert_file_to_base64(file: str):
     """convert file to base64 bytes"""
@@ -23,7 +25,7 @@ def retrieve_screenshot_scanned_file(host: str):
     if exists else return None
     """
     sanitize_host_zip = f'{sanitize_host(host)}.zip'
-    file_path = f'/root/VulnScanner-AppData/bigbrowser_report/{sanitize_host_zip}'
+    file_path = f'{env_vars.S3_DIR_PATH}/bigbrowser_report/{sanitize_host_zip}'
     if Path(file_path).exists():
         return file_path
     return None
@@ -31,7 +33,9 @@ def retrieve_screenshot_scanned_file(host: str):
 
 def s3_filesystem_move(source: str, destination: str):
     """move file from source to destination"""
-    S3FileSystem().mv(source, destination)
+    S3FileSystem(env_vars.S3_BUCKET_NAME,
+                 key=env_vars.S3_ACCESS_KEY,
+                 secret=env_vars.S3_SECRET_KEY).mv(source, destination)
 
 
 def sanitize_host(host: str):
