@@ -100,6 +100,8 @@ wget https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Lin
 tar -xf ZAP_2.12.0_Linux.tar.gz
 
 mv ZAP_2.12.0 ZAP
+
+./zap.sh -daemon -config api.key=$api_key
 ```
 
 **PhantomJS:**
