@@ -36,7 +36,27 @@ sudo apt upgrade -y && sudo apt update
 ```
 
 
-## Prerequisite Software Installations
+# Automated Deployment with Custom Script
+
+After sshing into the server, 
+
+Copy the custom script to the server
+
+**Convert the script to an executable file:** `chmod +x Deploy-Ubuntu-22-04-VulnScanner.bash` 
+
+**Execute the custom script:** `./Deploy-Ubuntu-22-04-VulnScanner.bash`
+
+```
+chmod +x Ubuntu-22-04-S3FS-VulnScanner.bash
+
+./Ubuntu-22-04-S3FS-VulnScanner.bash
+```
+
+
+# Manual Deployment
+
+
+## Prerequisite Software Installations (Manual Deployment)
 
 **Redis:**
 <br>

@@ -3,8 +3,6 @@
 from base64 import b64encode
 from pathlib import Path
 
-from s3fs.core import S3FileSystem
-
 from core.extras import env_vars
 
 
@@ -29,13 +27,6 @@ def retrieve_screenshot_scanned_file(host: str):
     if Path(file_path).exists():
         return file_path
     return None
-
-
-def s3_filesystem_move(source: str, destination: str):
-    """move file from source to destination"""
-    S3FileSystem(env_vars.S3_BUCKET_NAME,
-                 key=env_vars.S3_ACCESS_KEY,
-                 secret=env_vars.S3_SECRET_KEY).mv(source, destination)
 
 
 def sanitize_host(host: str):
