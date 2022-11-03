@@ -5,7 +5,7 @@ script to run the screenshot scan on the host
 import subprocess
 
 from apis.utils.error_logs import logger
-from apis.scanners.utils.extras import s3_filesystem_move, sanitize_host
+from apis.scanners.utils.extras import sanitize_host
 from core.extras import env_vars
 from .base import Scanner, get_server_user
 
@@ -35,27 +35,26 @@ class ScreenShotScanner(Scanner):
             # scan host with nmap
             self.cmd.run(['nmap', '-oX', f'{self.xml_output_file}', '-sV', f'{self.host}'],
                          capture_output=True,
-                         text=True,
                          check=True)
 
             # execute BigBrowser command and create bigbrowser_report/
             self.cmd.run(['xvfb-run', './BigBrowser.py', f'{self.xml_output_file}', f'{self.host}'],
                          capture_output=True,
-                         text=True,
                          check=True)
 
-            source = f'bigbrowser_report/{self.zip_output_file}'  # generated zip file from BigBrowser.py
+            source_file = f'bigbrowser_report/{self.zip_output_file}'  # generated zip file from BigBrowser.py
             destination = env_vars.S3_DIR_PATH
 
             # move source file to destination
-            s3_filesystem_move(source, destination)
+            self.cmd.run(['cp', f'{source_file}', f'{destination}'])
             return True
         except subprocess.CalledProcessError as e:
             logger.error('ScreenShotScanner.scan@Error')
             logger.error(e)
             return None
         finally:
-            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'])
+            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'],
+                         capture_output=True,)
 
     def response(self):
         """return response"""
