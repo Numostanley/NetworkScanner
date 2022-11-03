@@ -16,7 +16,7 @@ server {
     server_name ip_address;
     
     location /api/v1 {
-        alias /home/{$username}/path/to/project
+        alias /home/$username/path/to/project
     }
     
     location / {
