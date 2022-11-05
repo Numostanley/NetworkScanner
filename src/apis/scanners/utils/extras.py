@@ -19,7 +19,7 @@ def convert_file_to_base64(file: str):
 
 def retrieve_screenshot_scanned_file(host: str):
     """
-    retrieve file (from: /root/VulnScanner-AppData/bigbrowser_report/{sanitize_host_zip})
+    retrieve file (from: /{env_vars.S3_DIR_PATH}/bigbrowser_report/{sanitize_host_zip})
     if exists else return None
     """
     sanitize_host_zip = f'{sanitize_host(host)}.zip'
