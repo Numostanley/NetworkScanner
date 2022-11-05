@@ -19,11 +19,11 @@ def convert_file_to_base64(file: str):
 
 def retrieve_screenshot_scanned_file(host: str):
     """
-    retrieve file (from: /{env_vars.S3_DIR_PATH}/bigbrowser_report/{sanitize_host_zip})
+    retrieve file (from: /{env_vars.S3_DIR_PATH}/{sanitize_host_zip})
     if exists else return None
     """
     sanitize_host_zip = f'{sanitize_host(host)}.zip'
-    file_path = f'{env_vars.S3_DIR_PATH}/bigbrowser_report/{sanitize_host_zip}'
+    file_path = f'{env_vars.S3_DIR_PATH}/{sanitize_host_zip}'
     if Path(file_path).exists():
         return file_path
     return None
