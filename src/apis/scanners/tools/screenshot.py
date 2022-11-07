@@ -54,7 +54,7 @@ class ScreenShotScanner(Scanner):
             return None
         finally:
             self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'],
-                         capture_output=True,)
+                         capture_output=True)
 
     def response(self):
         """return response"""
