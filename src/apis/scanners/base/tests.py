@@ -1,1 +1,0 @@
-BASE_URL = '/api/v1/scanners'
