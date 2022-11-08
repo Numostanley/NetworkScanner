@@ -29,14 +29,14 @@ admin_urls = [
 # api urls
 api_urls = [
     path('scanners/', include(([
-        path('cvescanner/', include('apis.scanners.cvescannerv2.urls')),
-        path('dirby/', include('apis.scanners.dirby.urls')),
-        path('sslyze/', include('apis.scanners.sslyze.urls')),
-        path('wafwoof/', include('apis.scanners.wafw00f.urls')),
-        path('wapiti/', include('apis.scanners.wapiti.urls')),
-        path('whatweb/', include('apis.scanners.whatweb.urls')),
-        path('scanvus/', include('apis.scanners.scanvus.urls')),
+        path('cvescanner/', include('apis.scanners.cvescannerv2.urls', namespace='cvescannerv2')),
+        path('dirby/', include('apis.scanners.dirby.urls', namespace='dirby')),
+        path('scanvus/', include('apis.scanners.scanvus.urls', namespace='scanvus')),
         path('screenshot/', include('apis.scanners.screenshot.urls', namespace='screenshot')),
+        path('sslyze/', include('apis.scanners.sslyze.urls', namespace='sslyze')),
+        path('wafwoof/', include('apis.scanners.wafw00f.urls', namespace='wafwoof')),
+        path('wapiti/', include('apis.scanners.wapiti.urls', namespace='wapiti')),
+        path('whatweb/', include('apis.scanners.whatweb.urls', namespace='whatweb')),
         path('zap/', include('apis.scanners.zap.urls', namespace='zap'))
     ]))),
 ]

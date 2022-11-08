@@ -1,5 +1,6 @@
 import json
 
+from django.urls import reverse
 from django.test import TestCase
 
 from apis.scanners.base.tests import BASE_URL
@@ -16,12 +17,21 @@ class ZapScannerTest(TestCase):
         response = self.client.get(f'{BASE_URL}/zap/scan?')
         self.assertEqual(response.status_code, 400)
 
+    def test_api_key_in_query_params(self):
+        response = self.client.get(f'{BASE_URL}/zap/scan?')
+        self.assertEqual(response.status_code, 400)
+
     def test_host_key_value_not_specified_in_query_params(self):
         response = self.client.get(f'{BASE_URL}/zap/scan?host=')
         self.assertEqual(response.status_code, 400)
 
-    def test_whatweb_scan_is_in_progress(self):
-        response = self.client.get(f'{BASE_URL}/zap/scan?host={self.host}')
+    def test_api_key_value_not_specified_in_query_params(self):
+        response = self.client.get(f'{reverse("zap:scan")}?host={self.host}&api_key=')
+        self.assertEqual(response.status_code, 400)
+
+    def test_zap_scan_is_in_progress(self):
+        api_key = '9ipcclp6d52k81s2rau95kpm57'
+        response = self.client.get(f'{reverse("zap:scan")}?host={self.host}&api_key={api_key}')
         self.assertEqual(response.status_code, 200)
 
 
