@@ -24,8 +24,7 @@ exclude_lines =
     @abstract
 
     # Don't complain if tests don't hit defensive exceptions
+    try:
     except Exception as e:
-
-    send_pdf_report.delay
 
 show_missing = True

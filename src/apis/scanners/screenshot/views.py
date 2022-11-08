@@ -51,12 +51,12 @@ class ScreenShotScanResultAPIView(AuthProtectedAPIView):
 
         try:
             # retrieve zipped screenshot scanned file for host
-            file = retrieve_screenshot_scanned_file(host.ip_address)
-            if file:
+            try:
+                file = retrieve_screenshot_scanned_file(host.ip_address)
                 # if file is found return a FileResponse
                 return FileResponse(open(file, 'rb'), as_attachment=True, filename=file)
-
-            return responses.http_response_404('Not scanned result found!')
+            except FileNotFoundError:
+                return responses.http_response_404('Not scanned result found!')
         except Exception as e:
             error_logs.logger.error('ScreenShotScanResultAPIView.get@Error')
             error_logs.logger.error(e)

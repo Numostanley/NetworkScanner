@@ -20,6 +20,18 @@ class WapitiScanner(Scanner):
         self.tool = tool
 
     def change_directory(self):
+        # cd to the user directory
+        self.server_os.chdir(f"/home/{get_server_user()}/")
+        try:
+            # create wapiti directory
+            self.cmd.run(['mkdir', '-p', f'/tools/{self.tool}'],
+                           capture_output=True,
+                           check=True)
+        except subprocess.CalledProcessError:
+            # if `mkdir /tools/{self.tool}` command raises an error, skip because
+            # /tools/{self.tool} directory has already been created
+            pass
+
         # cd to the wapiti directory
         self.server_os.chdir(f"/home/{get_server_user()}/tools/{self.tool}")
 
@@ -55,24 +67,24 @@ class WapitiScanner(Scanner):
             # if `type > {output_file}` command raises an error, skip because
             # output_file has already been created
             pass
-        
+
         self.cmd.run(['wapiti', '-u', f'https://{self.ip_address}/',
                         '-f', 'json', '-o', f'/home/{get_server_user()}/tools/{self.tool}/ip_scans/{self.output_file}'])
-        
+
         # open the JSON file to ensure it was created.
         with open(self.output_file, 'r') as f:
             json_output = f.read()
-            
+
             wapiti_result = json.loads(json_output)
-            
+
             results = self.get_host_port_list(wapiti_result)
         return results
-        
+
     def response(self):
         """return result in json format"""
         response = json.dumps(self.scan(), indent=4, sort_keys=True)
         return response
-    
+
     def get_host_port_list(self, wapiti_result):
         """
         retrieve list of vulnerabilities from the result

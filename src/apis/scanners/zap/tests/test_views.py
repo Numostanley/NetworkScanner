@@ -1,8 +1,8 @@
 import json
 
 from django.test import TestCase
+from django.urls import reverse
 
-from apis.scanners.base.tests import BASE_URL
 from apis.scanners.hosts.models import Host
 from apis.scanners.zap.models import Zap
 
@@ -13,15 +13,24 @@ class ZapScannerTest(TestCase):
         self.host = '193.122.75.144'
 
     def test_host_key_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/zap/scan?')
+        response = self.client.get(f'{reverse("zap:scan")}?')
+        self.assertEqual(response.status_code, 400)
+
+    def test_api_key_in_query_params(self):
+        response = self.client.get(f'{reverse("zap:scan")}?host=')
         self.assertEqual(response.status_code, 400)
 
     def test_host_key_value_not_specified_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/zap/scan?host=')
+        response = self.client.get(f'{reverse("zap:scan")}?host=')
         self.assertEqual(response.status_code, 400)
 
-    def test_whatweb_scan_is_in_progress(self):
-        response = self.client.get(f'{BASE_URL}/zap/scan?host={self.host}')
+    def test_api_key_value_not_specified_in_query_params(self):
+        response = self.client.get(f'{reverse("zap:scan")}?host={self.host}&api_key=')
+        self.assertEqual(response.status_code, 400)
+
+    def test_zap_scan_is_in_progress(self):
+        api_key = '9ipcclp6d52k81s2rau95kpm57'
+        response = self.client.get(f'{reverse("zap:scan")}?host={self.host}&api_key={api_key}')
         self.assertEqual(response.status_code, 200)
 
 
@@ -44,29 +53,23 @@ class ZapScanResultTest(TestCase):
         self.get_zap_scan_with_no_result = Zap.get_zap_scan_by_host(self.found_host_with_no_result)
 
     def test_host_key_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/zap/get-result?')
+        response = self.client.get(f'{reverse("zap:result")}?')
         self.assertEqual(response.status_code, 400)
 
     def test_host_key_value_not_specified_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/zap/get-result?host=')
+        response = self.client.get(f'{reverse("zap:result")}?host=')
         self.assertEqual(response.status_code, 400)
 
     def test_host_not_found(self):
         # test if the host is not found
         self.assertIsNone(self.not_found_host)
-        response = self.client.get(
-            f'{BASE_URL}/zap/get-result?host={self.not_found_host}'
-        )
+        response = self.client.get(f'{reverse("zap:result")}?host={self.not_found_host}')
         self.assertEqual(response.status_code, 404)
 
     def test_zap_scan_result_does_not_exist_for_host(self):
-        response = self.client.get(
-            f'{BASE_URL}/zap/get-result?host={self.found_host_with_no_result}'
-        )
+        response = self.client.get(f'{reverse("zap:result")}?host={self.found_host_with_no_result}')
         self.assertEqual(response.status_code, 404)
 
     def test_zap_scan_result_exist_for_host(self):
-        response = self.client.get(
-            f'{BASE_URL}/zap/get-result?host={self.found_host_with_result}'
-        )
+        response = self.client.get(f'{reverse("zap:result")}?host={self.found_host_with_result}')
         self.assertEqual(response.status_code, 200)
