@@ -46,7 +46,7 @@ class ScreenShotScanner(Scanner):
             destination = env_vars.S3_DIR_PATH
 
             # move source file to destination
-            self.cmd.run(['cp', f'{source_file}', f'{destination}'])
+            self.cmd.run(['cp', f'{source_file}', f'/home/{get_server_user()}/{destination}'])
             return True
         except subprocess.CalledProcessError as e:
             logger.error('ScreenShotScanner.scan@Error')
