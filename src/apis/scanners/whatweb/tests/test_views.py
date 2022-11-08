@@ -1,8 +1,8 @@
 import json
 
 from django.test import TestCase
+from django.urls import reverse
 
-from apis.scanners.base.tests import BASE_URL
 from apis.scanners.hosts.models import Host
 from apis.scanners.whatweb.models import WhatWeb
 
@@ -13,15 +13,15 @@ class WhatWebScannerTest(TestCase):
         self.host = '193.122.75.144'
 
     def test_host_key_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/whatweb/scan?')
+        response = self.client.get(f'{reverse("whatweb:scan")}?')
         self.assertEqual(response.status_code, 400)
 
     def test_host_key_value_not_specified_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/whatweb/scan?host=')
+        response = self.client.get(f'{reverse("whatweb:scan")}?host=')
         self.assertEqual(response.status_code, 400)
 
     def test_whatweb_scan_is_in_progress(self):
-        response = self.client.get(f'{BASE_URL}/whatweb/scan?host={self.host}')
+        response = self.client.get(f'{reverse("whatweb:scan")}?host={self.host}')
         self.assertEqual(response.status_code, 200)
 
 
@@ -49,29 +49,23 @@ class WhatWebScanResultTest(TestCase):
         self.get_whatweb_scan_with_no_result = WhatWeb.get_whatweb_scan_by_host(self.found_host_with_no_result)
 
     def test_host_key_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/whatweb/get-result?')
+        response = self.client.get(f'{reverse("whatweb:result")}?')
         self.assertEqual(response.status_code, 400)
 
     def test_host_key_value_not_specified_in_query_params(self):
-        response = self.client.get(f'{BASE_URL}/whatweb/get-result?host=')
+        response = self.client.get(f'{reverse("whatweb:result")}?')
         self.assertEqual(response.status_code, 400)
 
     def test_host_not_found(self):
         # test if the host is not found
         self.assertIsNone(self.not_found_host)
-        response = self.client.get(
-            f'{BASE_URL}/whatweb/get-result?host={self.not_found_host}'
-        )
+        response = self.client.get(f'{reverse("whatweb:result")}?host={self.not_found_host}')
         self.assertEqual(response.status_code, 404)
 
     def test_whatweb_scan_result_does_not_exist_for_host(self):
-        response = self.client.get(
-            f'{BASE_URL}/whatweb/get-result?host={self.found_host_with_no_result}'
-        )
+        response = self.client.get(f'{reverse("whatweb:result")}?host={self.found_host_with_no_result}')
         self.assertEqual(response.status_code, 404)
 
     def test_whatweb_scan_result_exist_for_host(self):
-        response = self.client.get(
-            f'{BASE_URL}/whatweb/get-result?host={self.found_host_with_result}'
-        )
+        response = self.client.get(f'{reverse("whatweb:result")}?host={self.found_host_with_result}')
         self.assertEqual(response.status_code, 200)

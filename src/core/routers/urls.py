@@ -29,7 +29,7 @@ admin_urls = [
 # api urls
 api_urls = [
     path('scanners/', include(([
-        path('cvescanner/', include('apis.scanners.cvescannerv2.urls', namespace='cvescannerv2')),
+        path('cvescannerv2/', include('apis.scanners.cvescannerv2.urls', namespace='cvescannerv2')),
         path('dirby/', include('apis.scanners.dirby.urls', namespace='dirby')),
         path('scanvus/', include('apis.scanners.scanvus.urls', namespace='scanvus')),
         path('screenshot/', include('apis.scanners.screenshot.urls', namespace='screenshot')),
