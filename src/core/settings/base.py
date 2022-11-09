@@ -119,6 +119,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'scanners_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'scanners.db.sqlite3'
+    },
+    'users_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'users.db.sqlite3'
+    },
+    'vulnerabilities_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'vulnerabilities_db'
     }
 }
 
@@ -170,6 +182,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Multi-Database Router
+
+DATABASE_ROUTERS = [
+    'core.db_routers.db.ScannersDBRouter',
+    'core.db_routers.db.UsersDBRouter',
+    'core.db_routers.db.VulnerabilitiesDBRouter'
+]
 
 # API Extensions Settings
 
