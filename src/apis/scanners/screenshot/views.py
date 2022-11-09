@@ -50,7 +50,7 @@ class ScreenShotScanResultAPIView(AuthProtectedAPIView):
             return responses.http_response_404('Host not found!')
 
         try:
-            # retrieve zipped screenshot scanned file for host
+            # retrieve the zipped screenshot scanned file for host
             try:
                 file = retrieve_screenshot_scanned_file(host.ip_address)
                 # if file is found return a FileResponse

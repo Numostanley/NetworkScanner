@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from apis.scanners.hosts.models import Host
+from apis.scanners.tools.base import get_server_user
 from apis.scanners.utils.extras import sanitize_host
 from core.extras import env_vars
 
@@ -52,13 +53,16 @@ class ScreenShotScanResultTest(TestCase):
 
     def test_zipped_screenshot_scanned_file_not_found(self):
         # retrieve screenshot scanned file from its directory
-        file = f'/{env_vars.S3_DIR_PATH}/{sanitize_host(self.found_host_with_no_result_scan.ip_address)}.zip'
+        file = f'/home/{get_server_user()}/{env_vars.S3_DIR_PATH}/' \
+               f'{sanitize_host(self.found_host_with_no_result_scan.ip_address)}.zip'
         with self.assertRaises(FileNotFoundError):
             FileResponse(open(file, 'rb'), as_attachment=True, filename=file)
 
     def test_zipped_screenshot_scanned_file_is_found(self):
+        """NB: for this test to passed, run the scan test before running this test"""
         # retrieve screenshot scanned file from its directory
-        file = f'/{env_vars.S3_DIR_PATH}/{sanitize_host(self.found_host_with_result.ip_address)}.zip'
+        file = f'/home/{get_server_user()}/{env_vars.S3_DIR_PATH}/' \
+               f'{sanitize_host(self.found_host_with_result.ip_address)}.zip'
         self.assertTrue(open(file, 'rb'))
         r = FileResponse(open(file, 'rb'), as_attachment=True, filename=file)
         self.assertIsInstance(r, FileResponse)
