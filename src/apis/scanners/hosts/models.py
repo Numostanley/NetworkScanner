@@ -16,10 +16,10 @@ class Host(models.Model):
         try:
             # check if host is a valid IPv4/IPv6 address, then save to the ip_address field
             ip_address(host)
-            return Host.objects.create(domain_name=host)
+            return Host.objects.create(ip_address=host)
         except ValueError:
             # if host is not a valid IPv4/IPv6 address, save to the domain_name field
-            return Host.objects.create(ip_address=host)
+            return Host.objects.create(domain_name=host)
 
     @staticmethod
     def get_host(host: str):
