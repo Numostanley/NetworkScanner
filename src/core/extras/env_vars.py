@@ -10,4 +10,5 @@ from core.settings.base import env_config
 REDIS_URL = env_config['REDIS_URL']
 
 # S
-S3_DIR_PATH = env_config['S3_DIR_PATH']
+S3_DIR_PATH = env_config['S3_DIR_PATH'].replace("/", "") \
+    if env_config['S3_DIR_PATH'].startswith("/") else env_config['S3_DIR_PATH']

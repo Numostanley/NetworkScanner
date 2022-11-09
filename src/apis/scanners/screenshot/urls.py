@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from apis.scanners.screenshot import views
 
 
 app_name = "screenshot"

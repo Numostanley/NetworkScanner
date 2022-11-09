@@ -46,14 +46,14 @@ class ScreenShotScanner(Scanner):
             destination = env_vars.S3_DIR_PATH
 
             # move source file to destination
-            self.cmd.run(['cp', f'{source_file}', f'{destination}'])
+            self.cmd.run(['cp', f'{source_file}', f'/home/{get_server_user()}/{destination}'])
             return True
         except subprocess.CalledProcessError as e:
             logger.error('ScreenShotScanner.scan@Error')
             logger.error(e)
             return None
         finally:
-            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'],
+            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}', f'{self.xml_output_file}'],
                          capture_output=True)
 
     def response(self):
