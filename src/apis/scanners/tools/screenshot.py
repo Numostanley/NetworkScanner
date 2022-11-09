@@ -53,7 +53,7 @@ class ScreenShotScanner(Scanner):
             logger.error(e)
             return None
         finally:
-            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}'],
+            self.cmd.run(['rm', '-r', f'bigbrowser_report/{self.zip_output_file}', f'{self.xml_output_file}'],
                          capture_output=True)
 
     def response(self):

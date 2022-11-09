@@ -59,6 +59,7 @@ class ScreenShotScanResultTest(TestCase):
             FileResponse(open(file, 'rb'), as_attachment=True, filename=file)
 
     def test_zipped_screenshot_scanned_file_is_found(self):
+        """NB: for this test to passed, run the scan test before running this test"""
         # retrieve screenshot scanned file from its directory
         file = f'/home/{get_server_user()}/{env_vars.S3_DIR_PATH}/' \
                f'{sanitize_host(self.found_host_with_result.ip_address)}.zip'
