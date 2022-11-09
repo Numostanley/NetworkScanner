@@ -10,7 +10,7 @@ from apis.scanners.zap.models import Zap
 class ZapScannerTest(TestCase):
 
     def setUp(self) -> None:
-        self.host = '193.122.75.144'
+        self.host = 'http://193.122.75.144'
 
     def test_host_key_in_query_params(self):
         response = self.client.get(f'{reverse("zap:scan")}?')

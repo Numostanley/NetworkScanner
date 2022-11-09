@@ -23,15 +23,13 @@ def cvescanner_task(ip_address: str):
         host = Host.objects.get(ip_address=ip_address)
     except Host.DoesNotExist:
         # if host ip address does not exist, create new host
-        host = Host.create_host(
-            ip_address=ip_address
-        )
+        host = Host.create_host(ip_address)
 
     # deserialize data from json to python objects
     data_cleaned = json.loads(data)
 
     # populate CVEScannerV2 table
-    CVEScannerV2.create_cvescanner_scan(host=host, data=data_cleaned)
+    CVEScannerV2.create_cvescanner_scan(host, data_cleaned)
 
     # return the cleaned data
     return data_cleaned
