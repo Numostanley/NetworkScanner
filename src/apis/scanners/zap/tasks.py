@@ -17,6 +17,12 @@ def zap_task(ip_address: str, api_key: str):
     task = zap.ZapScanner(ip_address, api_key)
     data = task.response()
 
+    if ip_address[:7] == 'http://':
+        prefix, ip_address = ip_address.split('//')
+    
+    elif ip_address[:8] == 'https://':
+        prefix, ip_address = ip_address.split('//')
+   
     try:
         # retrieve host ip address
         host = Host.objects.get(ip_address=ip_address)
