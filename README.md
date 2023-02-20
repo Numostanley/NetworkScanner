@@ -1,5 +1,5 @@
 # VulnScanner
-This is a prototype app for a network vulnerability scanning SaaS application.
+This is a prototype app for a network vulnerability scanning open-source application.
 
 Details of how to run this project on a server can be accessed through the mkdocs file by running the following commands on your terminal;
 
