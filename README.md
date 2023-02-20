@@ -14,4 +14,4 @@ mkdocs serve
 ```
 
 This server side application implements serveral network scanning tools including
-nmap CVEScannerV2, Scanvus, Wapiti, Whatweb, SSlyze, Wafw00f, OWASPS ZAP and Derbi.
+nmap CVEScannerV2, Scanvus, Wapiti, Whatweb, SSlyze, Wafw00f, OWASP ZAP and Derbi.
