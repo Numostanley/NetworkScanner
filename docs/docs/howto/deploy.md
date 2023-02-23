@@ -250,7 +250,7 @@ sudo apt install wapiti -y
 ```
 git clone https://github.com/Numostanley/NetworkScanner.git
 
-cd VulnScanner/
+cd NetworkScanner/
 ```
 
 
