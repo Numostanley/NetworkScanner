@@ -248,7 +248,7 @@ sudo apt install wapiti -y
 `cd` to the home directory and clone the VulnScanner repo
 
 ```
-git clone https://github.com/CyberMeStudio/VulnScanner.git
+git clone https://github.com/Numostanley/NetworkScanner.git
 
 cd VulnScanner/
 ```

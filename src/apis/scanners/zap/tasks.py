@@ -26,6 +26,8 @@ def zap_task(ip_address: str, api_key: str):
     try:
         # retrieve host ip address
         host = Host.objects.get(ip_address=ip_address)
+        
+        # fix bug to check for host with domain name.
     except Host.DoesNotExist:
         # if host ip address does not exist, create new host
         host = Host.create_host(host=ip_address)
